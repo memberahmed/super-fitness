@@ -6,11 +6,11 @@ export default function RootLayout() {
     <>
       <Providers>
         {/* Application Content */}
-        <header className="text-center">
+        <header className="text-center pt-4">
           <nav>NavBar</nav>
         </header>
 
-        <main className="container mx-auto p-4 bg-red-500">
+        <main className="container mx-auto p-4">
           <Outlet />
         </main>
 
