@@ -29,7 +29,7 @@ export const routes = createBrowserRouter([
     ),
     children: [
       {
-        path: "drugs",
+        index: true,
         element: (
           <ProdectRoute>
             <Suspense fallback={<h1>Loading.......</h1>}>
