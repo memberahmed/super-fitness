@@ -8,7 +8,7 @@ export default function RootLayout() {
     <>
       {/* Application Content */}
       <Header />
-      <main className="container mx-auto p-4">
+      <main className="">
         <Outlet />
       </main>
 

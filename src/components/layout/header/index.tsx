@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className="flex items-center justify-between p-4 fixed top-10 left-0 right-0 z-50">
       {/* Logo */}
       <img src="/src/assets/images/logo.svg" className="w-16" alt="logo" />
 
