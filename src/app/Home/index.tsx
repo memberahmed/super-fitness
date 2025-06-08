@@ -1,7 +1,9 @@
+import AboutUs from "./_components/about-us/about-us";
+
 export default function Home() {
   return (
     <div>
-      <h1>Home</h1>
+      <AboutUs />
     </div>
   );
 }
