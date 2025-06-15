@@ -9,9 +9,16 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        rubik: ['"Rubik"', "sans-serif"],
+        baloo: ['"Baloo Thambi 2"', "cursive"],
+      },
       colors: {
+        flame: "#FF4100",
+        cloudy: "#F3F3F4",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        surface: "hsl(var(--surface))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

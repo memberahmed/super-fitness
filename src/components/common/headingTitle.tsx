@@ -7,7 +7,12 @@ type HeadingTitle = {
 export default function HeadingTitle({ className, children }: HeadingTitle) {
   return (
     // TODO: edit style
-    <div className={cn("text-xl lg:text-[40px] font-bold text-gray-900 leading-snug", className)}>
+    <div
+      className={cn(
+        "text-xl lg:text-[40px] font-bold font-baloo text-foreground leading-snug",
+        className
+      )}
+    >
       {children}
     </div>
   );
