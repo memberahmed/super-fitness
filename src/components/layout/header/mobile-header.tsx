@@ -1,7 +1,6 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import ArrowIconRight from "@/components/common/right-arrow-icon/ArrowIconRight";
 import logo from "@/assets/images/logo.svg";
 
 export default function MobileHeader() {
@@ -92,9 +91,7 @@ export default function MobileHeader() {
           className="w-[90%] mt-10 min-h-12 mx-auto  bg-flame text-white px-5 py-3 rounded-full text-base font-bold flex items-center justify-center uppercase "
         >
           login
-          <div className="ml-2">
-            <ArrowIconRight />
-          </div>
+          <div className="ml-2"></div>
         </button>
 
         {/* Sign Up Button */}
@@ -103,9 +100,7 @@ export default function MobileHeader() {
           className="w-[90%] my-4 min-h-12 mx-auto border-2 border-flame px-6 py-3 rounded-full text-base font-bold text-flame flex items-center justify-center uppercase"
         >
           sign up
-          <div className="ml-2">
-            <ArrowIconRight />
-          </div>
+          <div className="ml-2"></div>
         </button>
       </div>
     </header>
