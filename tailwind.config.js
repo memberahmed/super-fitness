@@ -18,6 +18,7 @@ module.exports = {
       colors: {
         flame: "#FF4100",
         cloudy: "#F3F3F4",
+        "custom-gray": "var(--gray)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

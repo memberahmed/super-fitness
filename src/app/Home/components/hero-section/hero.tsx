@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <>
       {/* ===== Hero Section ===== */}
-      <div className="grid gird-col-1 md:grid-cols-2 font-rubik lg:mt-[200px]">
+      <div className="grid grid-cols-1  md:grid-cols-2 font-rubik lg:mt-[200px]">
         {/* ===== Left Content Section ===== */}
         <div className="left pt-0 dark:text-cloudy md:pt-16">
           {/* --- Heading --- */}
