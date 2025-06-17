@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import i18n from "./lib/utils/i18n";
 
 export default function App() {
-  const { lang, direction, theme } = localStorage;
+  const { lang, direction} = localStorage;
   useEffect(() => {
     if (lang && direction) {
       i18n.changeLanguage(lang);
@@ -15,14 +15,11 @@ export default function App() {
       localStorage.lang = "en";
       localStorage.direction = "ltr";
     }
-    if (!theme) {
-      localStorage.theme = "light";
-    }
-  }, []);
+  }, [lang, direction]);
 
   return (
     <Providers>
-      <div className={`${theme == "dark" && "dark"}`}>
+      <div>
         <RouterProvider router={routes} />
       </div>
     </Providers>
