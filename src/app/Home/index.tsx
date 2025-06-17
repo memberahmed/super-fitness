@@ -11,7 +11,7 @@ export default function Home() {
           backgroundImage: `url(${bgHero})`,
         }}
       >
-        <div className="w-full h-full bg-custom-gray backdrop-blur-[35.1px]" />
+        <div className="w-full h-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[35.1px]" />
       </div>
 
       <div className="container mx-auto px-4">
