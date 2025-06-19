@@ -2,8 +2,15 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "@/assets/images/logo.svg";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import ThemeToggle from "@/components/features/toggle-dark-mode/theme-toggle";
+import LangToggle from "@/components/features/toggle-lang/lang-toggle";
 
 export default function MobileHeader() {
+  // Translation
+  const { t } = useTranslation();
+
   // State
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -11,22 +18,22 @@ export default function MobileHeader() {
   const navLinks = [
     {
       id: 1,
-      name: "Home",
+      name: t("Home"),
       link: "/",
     },
     {
       id: 2,
-      name: "About",
+      name: t("About"),
       link: "/about",
     },
     {
       id: 3,
-      name: "Classes",
+      name: t("Classes"),
       link: "/classes",
     },
     {
       id: 4,
-      name: "Healthy",
+      name: t("Healthy"),
       link: "/healthy",
     },
   ];
@@ -47,13 +54,21 @@ export default function MobileHeader() {
         <img src={logo} className="w-[87px] h-14 object-contain" alt="logo" />
       </Link>
 
-      {/* Hamburger Menu Button */}
-      <button
-        onClick={toggleMenu}
-        className="w-12 h-12 bg-flame text-white rounded-full flex items-center justify-center"
-      >
-        <Menu size={25} />
-      </button>
+      <div className="flex items-center gap-3">
+        {/* Theme Toggle */}
+        <ThemeToggle />
+
+        {/* Lang Toggle */}
+        <LangToggle />
+
+        {/* Hamburger Menu Button */}
+        <button
+          onClick={toggleMenu}
+          className="w-12 h-12 bg-flame text-white rounded-full flex items-center justify-center"
+        >
+          <Menu size={25} />
+        </button>
+      </div>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && <div className="fixed inset-0 bg-black/50 z-40" onClick={closeMenu} />}
@@ -86,22 +101,22 @@ export default function MobileHeader() {
         </nav>
 
         {/* Login Button */}
-        <button
+        <Button
           onClick={closeMenu}
-          className="w-[90%] mt-10 min-h-12 mx-auto  bg-flame text-white px-5 py-3 rounded-full text-base font-bold flex items-center justify-center uppercase "
+          variant={"flame"}
+          className="w-[90%] mt-10 min-h-12 mx-auto px-5 py-3 flex items-center justify-center uppercase "
         >
-          login
-          <div className="ml-2"></div>
-        </button>
+          {t("login")}
+        </Button>
 
         {/* Sign Up Button */}
-        <button
+        <Button
           onClick={closeMenu}
-          className="w-[90%] my-4 min-h-12 mx-auto border-2 border-flame px-6 py-3 rounded-full text-base font-bold text-flame flex items-center justify-center uppercase"
+          variant={"flameOutline"}
+          className="w-[90%] min-h-12 mt-3 mb-6 mx-auto px-5 py-3 flex items-center justify-center uppercase "
         >
-          sign up
-          <div className="ml-2"></div>
-        </button>
+          {t("sign-up")}
+        </Button>
       </div>
     </header>
   );

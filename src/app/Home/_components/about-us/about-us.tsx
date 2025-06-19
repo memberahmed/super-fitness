@@ -6,25 +6,29 @@ import HeadingTitle from "@/components/common/headingTitle";
 import workout from "@/assets/images/about-us/workout.png";
 import ArrowIconRight from "@/components/common/right-arrow-icon/ArrowIconRight";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function AboutUs() {
+  // Translation
+  const { t } = useTranslation();
+
   // Variables
   const features = [
     {
-      title: "Personal Trainer",
-      description: "Achieve your fitness goals with the guidance of our certified trainers.",
+      title: t("about-us-title-1"),
+      description: t("about-us-description-1"),
     },
     {
-      title: "Cardio Programs",
-      description: "From steady-state runs to interval sprints, our cardio programs suit all.",
+      title: t("about-us-title-2"),
+      description: t("about-us-description-2"),
     },
     {
-      title: "Quality Equipment",
-      description: "Train with top-of-the-line gym equipment to maximize performance.",
+      title: t("about-us-title-3"),
+      description: t("about-us-description-3"),
     },
     {
-      title: "Healthy Nutrition",
-      description: "Expert nutritional advice to support your fitness journey.",
+      title: t("about-us-title-4"),
+      description: t("about-us-description-4"),
     },
   ];
 
@@ -32,7 +36,7 @@ export default function AboutUs() {
     <section className="px-4 md:px-10 lg:px-20">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Images Section */}
-        <div className="relative order-2 lg:order-1">
+        <div className="relative order-2 lg:order-1 mt-20">
           <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
             {/* Main Image */}
             <div className="absolute left-0 top-0 w-[57%] h-[75%] z-10">
@@ -68,22 +72,21 @@ export default function AboutUs() {
           {/* Heading */}
           <section>
             <div className="flex flex-col mt-20 font-baloo">
-              <img src={workout} alt="workout text" className="w-80 h-16 object-contain" />
+              <img src={workout} alt="workout text" className="w-80 h-16 mt-10 object-contain" />
+
               <div className="flex items-center gap-2 -mt-8 capitalize text-base font-bold  text-flame">
                 <Dumbbell width={30} height={30} strokeWidth={1.3} />
-                about us
+                {t("about-us")}
               </div>
             </div>
 
             <HeadingTitle className="mt-6 text-foreground">
-              EMPOWERING YOU TO ACHIEVE <span className="text-flame me-1">YOUR FITNESS</span>
-              GOALS
+              {t("empowering-you-to-achieve-goals")}
+              <span className="text-flame ms-1">{t("your-fitness")}</span>
             </HeadingTitle>
 
             <p className="text-foreground text-lg mt-6 font-normal font-rubik">
-              We believe fitness is more than just a workout—it's a lifestyle. With top-of- the-line
-              facilities, certified trainers, and a supportive community, we're here to inspire and
-              guide you every step of the way.
+              {t("about-us-heading")}
             </p>
           </section>
 
@@ -116,17 +119,17 @@ export default function AboutUs() {
           </div>
 
           {/* Get Started Button */}
-          <div className="mt-8 flex items-center pb-10">
+          <button className="mt-8 flex items-center pb-0 md:pb-10">
             <Link
               to="/signup"
-              className="relative bg-flame text-white px-8 py-3 rounded-full text-lg font-semibold  transition-all duration-300 flex items-center font-rubik"
+              className="relative bg-flame text-white px-8 py-3 rounded-full text-lg font-semibold flex items-center font-rubik"
             >
-              Get Started
+              {t("get-started")}
               <div className="mr-1">
                 <ArrowIconRight />
               </div>
             </Link>
-          </div>
+          </button>
         </div>
       </div>
     </section>

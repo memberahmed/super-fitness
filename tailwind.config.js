@@ -2,6 +2,8 @@
 module.exports = {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
+  darkMode: ["class"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       borderRadius: {
@@ -16,6 +18,7 @@ module.exports = {
       colors: {
         flame: "#FF4100",
         cloudy: "#F3F3F4",
+        charcoal: "#242424",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         surface: "hsl(var(--surface))",

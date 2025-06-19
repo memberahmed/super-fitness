@@ -1,27 +1,35 @@
 import ArrowIconRight from "@/components/common/right-arrow-icon/ArrowIconRight";
+import ThemeToggle from "@/components/features/toggle-dark-mode/theme-toggle";
+import LangToggle from "@/components/features/toggle-lang/lang-toggle";
+import { Button } from "@/components/ui/button";
+import i18n from "@/lib/utils/i18n";
+import { useTranslation } from "react-i18next";
 import { Link, NavLink } from "react-router-dom";
 
 export default function DesktopHeader() {
+  //Translation
+  const { t } = useTranslation();
+
   // Navigation links
   const nanLinks = [
     {
       id: 1,
-      name: "Home",
+      name: t("Home"),
       link: "/",
     },
     {
       id: 2,
-      name: "About",
+      name: t("About"),
       link: "/about",
     },
     {
       id: 3,
-      name: "Classes",
+      name: t("Classes"),
       link: "/classes",
     },
     {
       id: 4,
-      name: "Healthy",
+      name: t("Healthy"),
       link: "/healthy",
     },
   ];
@@ -54,23 +62,41 @@ export default function DesktopHeader() {
         ))}
       </nav>
 
-      {/* Authentication buttons */}
+      {/* Header buttons */}
       <div className="flex gap-5 items-center text-base font-bold">
+        {/* Theme Toggle */}
+        <ThemeToggle />
+
+        {/* Language Toggle */}
+        <LangToggle />
+
         {/* Login Button */}
-        <button className="relative min-w-20 min-h-11 bg-flame text-white px-4 py-2 rounded-full text-base font-bold text-background transition-all duration-300 flex items-center uppercase">
-          login
-          <div className="mr-1">
+        <Button
+          variant={"flame"}
+          size={"default"}
+          className={`relative min-w-20 min-h-11 flex items-center gap-2 uppercase ${
+            i18n.dir() === "rtl" ? "flex-row-reverse" : ""
+          }`}
+        >
+          {t("login")}
+          <div>
             <ArrowIconRight />
           </div>
-        </button>
+        </Button>
 
         {/* Sign Up Button */}
-        <button className="relative min-w-20 min-h-11 border-2 border-flame px-4 py-2 rounded-full text-base font-bold text-flame transition-all duration-300 flex items-center uppercase">
-          sign up
-          <div className="mr-1">
+        <Button
+          variant={"flameOutline"}
+          size={"default"}
+          className={`relative border-2 min-w-20 min-h-11 flex items-center gap-2 uppercase ${
+            i18n.dir() === "rtl" ? "flex-row-reverse" : ""
+          }`}
+        >
+          {t("sign-up")}
+          <div>
             <ArrowIconRight />
           </div>
-        </button>
+        </Button>
       </div>
     </header>
   );
