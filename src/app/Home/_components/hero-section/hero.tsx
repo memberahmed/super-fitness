@@ -11,7 +11,7 @@ export default function HeroSection() {
   return (
     <>
       {/* ===== Hero Section ===== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 font-rubik mt-[110px] md:mt-[200px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 font-rubik mt-[110px] md:mt-[200px] mx-4 md:mx-20">
         {/* ===== Left Content Section ===== */}
         <div className="left pt-0 text-charcoal dark:text-cloudy md:pt-16">
           {/* --- Heading --- */}
@@ -48,8 +48,8 @@ export default function HeroSection() {
           </div>
 
           {/* --- Call-to-Action Buttons --- */}
-          <div className="cta mt-16 mb-4 flex justify-between md:justify-normal md:gap-16 ">
-            <Button variant="flame" size="flameLg">
+          <div className="cta mt-16 mb-4 flex flex-wrap gap-5 md:gap-10 justify-between items-center md:justify-normal">
+            <Button variant="flame" size="flameLg" className="m-2">
               {t("get-started")}
               <ArrowIconRight />
             </Button>

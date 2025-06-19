@@ -2,9 +2,13 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
 export default function LangToggle() {
+  //Translation
   const { i18n: i18next } = useTranslation(); // this subscribes to language changes
+
+  // State
   const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
+  //
   const toggleLang = () => {
     const newLang = lang === "en" ? "ar" : "en";
     const newDir = newLang === "ar" ? "rtl" : "ltr";

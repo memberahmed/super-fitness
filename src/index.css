@@ -8,6 +8,7 @@
     --gray:#ffffff99;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
+    --surface: 180 4% 95%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
@@ -37,6 +38,7 @@
     --gray: #24242499;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
+    --surface: 200 4% 15%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;

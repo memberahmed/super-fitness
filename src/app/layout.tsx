@@ -1,18 +1,17 @@
-import Footer from "@/components/layout/footer";
-import Header from "@/components/layout/header";
-
+import DesktopHeader from "@/components/layout/header/desktop-header";
+import MobileHeader from "@/components/layout/header/mobile-header";
 import { Outlet } from "react-router-dom";
 
 export default function RootLayout() {
   return (
     <>
-      {/* Application Content */}
-      <Header />
+      {/* Header */}
+      <DesktopHeader />
+      <MobileHeader />
+
       <main className="">
         <Outlet />
       </main>
-
-      <Footer />
     </>
   );
 }

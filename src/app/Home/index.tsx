@@ -1,5 +1,6 @@
-import HeroSection from "./components/hero-section/hero";
 import bgHero from "../../assets/images/hero-bg.png";
+import AboutUs from "./_components/about-us/about-us";
+import HeroSection from "./_components/hero-section/hero";
 
 export default function Home() {
   return (
@@ -13,9 +14,14 @@ export default function Home() {
       >
         <div className="w-full h-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[35.1px]" />
       </div>
-
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 pt-24 md:pt-0 ">
+        {/* Hero */}
         <HeroSection />
+      </div>
+
+      {/* About Us */}
+      <div className="bg-surface">
+        <AboutUs />
       </div>
     </div>
   );
