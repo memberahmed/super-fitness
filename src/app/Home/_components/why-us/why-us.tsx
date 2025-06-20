@@ -67,7 +67,7 @@ export default function WhyUs() {
                     {step.steps.toString().padStart(2, "0")}
                   </div>
                   {index < features.length - 1 && (
-                    <div className="w-px h-12 border-r border-dotted border-gray-400 my-1"></div>
+                    <div className="w-px md:h-16 h-28 border-r border-dotted border-gray-400 my-1"></div>
                   )}
                 </div>
               ))}
@@ -104,7 +104,7 @@ export default function WhyUs() {
           </div>
 
           {/* Second Column */}
-          <div className="space-y-4 self-center">
+          <div className="space-y-4 self-start">
             <img
               src={whyus2}
               alt="Fitness Workout"
