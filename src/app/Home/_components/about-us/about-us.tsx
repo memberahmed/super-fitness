@@ -15,18 +15,22 @@ export default function AboutUs() {
   // Variables
   const features = [
     {
+      id: 1,
       title: t("about-us-title-1"),
       description: t("about-us-description-1"),
     },
     {
+      id: 2,
       title: t("about-us-title-2"),
       description: t("about-us-description-2"),
     },
     {
+      id: 3,
       title: t("about-us-title-3"),
       description: t("about-us-description-3"),
     },
     {
+      id: 4,
       title: t("about-us-title-4"),
       description: t("about-us-description-4"),
     },
@@ -93,8 +97,8 @@ export default function AboutUs() {
           {/* Features Section */}
           <div className="grid md:grid-cols-2 gap-6 font-baloo">
             {/* First Features Row */}
-            {features.slice(0, 2).map((feature, index) => (
-              <div key={index} className="mt-14">
+            {features.slice(0, 2).map((feature) => (
+              <div key={feature.id} className="mt-14">
                 <div className="flex items-center gap-3">
                   <MoveUpRight size={18} className="text-flame" />
                   <h3 className="font-bold text-base text-foreground mb-4">{feature.title}</h3>
