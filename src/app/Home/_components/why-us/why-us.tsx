@@ -104,7 +104,7 @@ export default function WhyUs() {
           </div>
 
           {/* Second Column */}
-          <div className="space-y-4 self-start">
+          <div className="space-y-4 self-center">
             <img
               src={whyus2}
               alt="Fitness Workout"
