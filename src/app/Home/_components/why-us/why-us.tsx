@@ -77,8 +77,8 @@ export default function WhyUs() {
             <div className="flex flex-col gap-8 self-center">
               {features.map((feature) => (
                 <div className="flex flex-col" key={feature.id}>
-                  <div className="font-bold text-base text-foreground">{feature.title}</div>
-                  <p className="text-foreground text-base font-normal font-rubik">
+                  <div className="font-bold text-base text-foreground mb-2">{feature.title}</div>
+                  <p className="text-foreground text-base font-normal font-rubik leading-7">
                     {feature.description}
                   </p>
                 </div>
