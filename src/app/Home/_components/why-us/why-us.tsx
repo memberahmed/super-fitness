@@ -34,7 +34,7 @@ export default function WhyUs() {
   ];
 
   return (
-    <section className="px-4 md:px-10 lg:px-20 py-8">
+    <section className="px-4 md:px-10 lg:px-20 py-8 max-w-[1500px] mx-auto">
       <div className="grid lg:grid-cols-2 gap-10">
         <div>
           {/* Content Section */}

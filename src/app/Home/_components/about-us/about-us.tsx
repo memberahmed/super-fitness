@@ -37,7 +37,7 @@ export default function AboutUs() {
   ];
 
   return (
-    <section className="px-4 md:px-10 lg:px-20">
+    <section className="px-4 md:px-10 lg:px-20 max-w-[1500px] mx-auto">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Images Section */}
         <div className="relative order-2 lg:order-1 mt-20">
