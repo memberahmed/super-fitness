@@ -94,11 +94,13 @@ export default function WhyUs() {
             <img
               src={whyus4}
               alt="Fitness Training"
+              loading="lazy"
               className="w-full h-[378px] rounded-2xl object-cover"
             />
             <img
               src={whyus3}
               alt="Gym Equipment"
+              loading="lazy"
               className="w-full h-[344px] rounded-2xl object-cover"
             />
           </div>
@@ -108,11 +110,13 @@ export default function WhyUs() {
             <img
               src={whyus2}
               alt="Fitness Workout"
+              loading="lazy"
               className="w-full h-72 rounded-2xl object-cover"
             />
             <img
               src={whyus1}
               alt="Personal Training"
+              loading="lazy"
               className="w-full h-[346px] rounded-2xl object-cover"
             />
           </div>

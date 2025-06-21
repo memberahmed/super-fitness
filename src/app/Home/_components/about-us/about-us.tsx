@@ -47,6 +47,7 @@ export default function AboutUs() {
               <img
                 src={about1}
                 alt="Fitness training session"
+                loading="lazy"
                 className="w-full h-full object-cover rounded-2xl"
               />
             </div>
@@ -55,6 +56,7 @@ export default function AboutUs() {
             <div className="absolute right-0 top-16 md:top-20 w-[40%] h-[30%] z-20">
               <img
                 src={about2}
+                loading="lazy"
                 alt="Gym equipment"
                 className="w-full h-full object-cover rounded-2xl"
               />
@@ -64,6 +66,7 @@ export default function AboutUs() {
             <div className="absolute right-0 bottom-0 w-[55%] h-[55%] z-30">
               <img
                 src={about3}
+                loading="lazy"
                 alt="Personal training"
                 className="w-full h-full object-cover rounded-2xl"
               />
