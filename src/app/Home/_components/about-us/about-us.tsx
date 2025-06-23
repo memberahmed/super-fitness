@@ -15,25 +15,29 @@ export default function AboutUs() {
   // Variables
   const features = [
     {
+      id: 1,
       title: t("about-us-title-1"),
       description: t("about-us-description-1"),
     },
     {
+      id: 2,
       title: t("about-us-title-2"),
       description: t("about-us-description-2"),
     },
     {
+      id: 3,
       title: t("about-us-title-3"),
       description: t("about-us-description-3"),
     },
     {
+      id: 4,
       title: t("about-us-title-4"),
       description: t("about-us-description-4"),
     },
   ];
 
   return (
-    <section className="px-4 md:px-10 lg:px-20">
+    <section className="px-4 md:px-10 lg:px-20 max-w-[1500px] mx-auto">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Images Section */}
         <div className="relative order-2 lg:order-1 mt-20">
@@ -43,6 +47,7 @@ export default function AboutUs() {
               <img
                 src={about1}
                 alt="Fitness training session"
+                loading="lazy"
                 className="w-full h-full object-cover rounded-2xl"
               />
             </div>
@@ -51,6 +56,7 @@ export default function AboutUs() {
             <div className="absolute right-0 top-16 md:top-20 w-[40%] h-[30%] z-20">
               <img
                 src={about2}
+                loading="lazy"
                 alt="Gym equipment"
                 className="w-full h-full object-cover rounded-2xl"
               />
@@ -60,6 +66,7 @@ export default function AboutUs() {
             <div className="absolute right-0 bottom-0 w-[55%] h-[55%] z-30">
               <img
                 src={about3}
+                loading="lazy"
                 alt="Personal training"
                 className="w-full h-full object-cover rounded-2xl"
               />
@@ -93,8 +100,8 @@ export default function AboutUs() {
           {/* Features Section */}
           <div className="grid md:grid-cols-2 gap-6 font-baloo">
             {/* First Features Row */}
-            {features.slice(0, 2).map((feature, index) => (
-              <div key={index} className="mt-14">
+            {features.slice(0, 2).map((feature) => (
+              <div key={feature.id} className="mt-14">
                 <div className="flex items-center gap-3">
                   <MoveUpRight size={18} className="text-flame" />
                   <h3 className="font-bold text-base text-foreground mb-4">{feature.title}</h3>
