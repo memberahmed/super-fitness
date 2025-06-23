@@ -1,6 +1,7 @@
 import bgHero from "../../assets/images/hero-bg.png";
 import AboutUs from "./_components/about-us/about-us";
 import HeroSection from "./_components/hero-section/hero";
+import WhyUs from "./_components/why-us/why-us";
 import WorkoutSection from "./_components/workout/workout";
 
 export default function Home() {
@@ -29,6 +30,11 @@ export default function Home() {
 
         {/* Workout Section */}
         <WorkoutSection />
+      </div>
+
+      {/* Why Us */}
+      <div className="bg-surface">
+        <WhyUs />
       </div>
     </div>
   );
