@@ -6,6 +6,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      letterSpacing: {
+        none: "0",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -16,6 +19,9 @@ module.exports = {
         baloo: ['"Baloo Thambi 2"', "cursive"],
       },
       colors: {
+        "light-gray": "#D3D3D3",
+        "orange-base": "#FF410033",
+        "muted-white": "#D9D9D9",
         flame: "#FF4100",
         cloudy: "#F3F3F4",
         charcoal: "#242424",

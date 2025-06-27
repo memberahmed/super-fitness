@@ -5,18 +5,18 @@ import { Suspense } from "react";
 
 export const routes = createBrowserRouter([
   {
-    path: "/login",
-    element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
-        <Login />
-      </Suspense>
-    ),
-  },
-  {
     path: "/register",
     element: (
       <Suspense fallback={<h1>Loading.......</h1>}>
         <Register />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<h1>Loading.......</h1>}>
+        <Login />
       </Suspense>
     ),
   },
@@ -27,6 +27,7 @@ export const routes = createBrowserRouter([
         <Layout />
       </Suspense>
     ),
+
     children: [
       {
         index: true,
