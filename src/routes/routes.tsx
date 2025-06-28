@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home, Login, Register, Layout } from "../app/index";
 import ProdectRoute from "../components/common/ProdectRoute";
 import { Suspense } from "react";
+import PagesLoader from "@/components/common/pages-loader/pages-loader";
 
 export const routes = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense fallback={<PagesLoader />}>
         <Login />
       </Suspense>
     ),
@@ -15,7 +16,7 @@ export const routes = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense fallback={<PagesLoader />}>
         <Register />
       </Suspense>
     ),
@@ -23,7 +24,7 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense fallback={<PagesLoader />}>
         <Layout />
       </Suspense>
     ),
@@ -32,7 +33,7 @@ export const routes = createBrowserRouter([
         index: true,
         element: (
           <ProdectRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
+            <Suspense fallback={<PagesLoader />}>
               <Home />
             </Suspense>
           </ProdectRoute>
