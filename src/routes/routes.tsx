@@ -22,12 +22,13 @@ export const routes = createBrowserRouter([
     ),
   },
   {
-    path: "/",
+    path: "/login",
     element: (
       <Suspense fallback={<PagesLoader />}>
         <Layout />
       </Suspense>
     ),
+
     children: [
       {
         index: true,
