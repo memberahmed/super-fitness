@@ -24,7 +24,7 @@ export const routes = createBrowserRouter([
     ),
   },
   {
-    path: "/login",
+    path: "/",
     element: (
       <Suspense fallback={<PagesLoader />}>
         <Layout />
@@ -36,7 +36,7 @@ export const routes = createBrowserRouter([
         index: true,
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<PagesLoader />}>
+            <Suspense fallback={<h1>Loading.......</h1>}>
               <Home />
             </Suspense>
           </ProtectedRoute>
@@ -46,8 +46,8 @@ export const routes = createBrowserRouter([
         path: "about",
         element: (
           <ProtectedRoute>
-      <Suspense fallback={<PagesLoader />}>
-      <AboutPage />
+            <Suspense fallback={<h1>Loading.......</h1>}>
+              <AboutPage />
             </Suspense>
           </ProtectedRoute>
         ),
@@ -56,8 +56,8 @@ export const routes = createBrowserRouter([
         path: "classes",
         element: (
           <ProtectedRoute>
-      <Suspense fallback={<PagesLoader />}>
-      <ClassesPage />
+            <Suspense fallback={<h1>Loading.......</h1>}>
+              <ClassesPage />
             </Suspense>
           </ProtectedRoute>
         ),
