@@ -1,6 +1,7 @@
 import bgHero from "../../assets/images/hero-bg.png";
 import AboutUs from "./_components/about-us/about-us";
 import HeroSection from "./_components/hero-section/hero";
+import MealsSection from "./_components/meals-section/meals";
 import WhyUs from "./_components/why-us/why-us";
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
       <div className="bg-surface">
         <WhyUs />
       </div>
+      <MealsSection />
     </div>
   );
 }

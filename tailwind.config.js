@@ -6,6 +6,12 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "meal-bg-img": "url('/src/assets/images/meals/meals.jpg')",
+        "breakfast-bg": "url('/src/assets/images/meals/breakfast.jpg')",
+        "lunch-bg": "url('/src/assets/images/meals/lunch.jpg')",
+        "dinner-bg": "url('/src/assets/images/meals/dinner.jpg')",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
