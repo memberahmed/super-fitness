@@ -9,3 +9,13 @@ export default function ArrowIconRight() {
     />
   );
 }
+
+export function ArrowIconLight() {
+  return (
+    <img
+      src={ArrowIcon}
+      alt="arrow-icon"
+      className="bg-flame p-2 rounded-full hidden md:block"
+    />
+  );
+}

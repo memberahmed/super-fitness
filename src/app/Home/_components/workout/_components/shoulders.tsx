@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import WorkoutCarousel from "./workout-carousel";
-import { getRandomPrimeMover } from "@/lib/apis/random-prime-mover.api";
+import { getPrimeMoverMuscleByID } from "@/lib/apis/random-prime-mover.api";
 import type { Muscle } from "@/lib/types/muscles";
-import Spinner from '../../../../../routes/loadingSpinner';
+import Spinner from "@/routes/loadingSpinner";
 
-export default function FullBody() {
+export default function Shoulders() {
   // State variables
   const [muscleArray, setMuscleArray] = useState<Muscle[] | null>(null);
   const language = localStorage.getItem("lang") || "en";
+  const shouldersId = "67c79f3526895f87ce0aa96e";
 
   useEffect(() => {
-    getRandomPrimeMover(language)
+    getPrimeMoverMuscleByID(shouldersId, language)
       .then((data) => {
         setMuscleArray(data.muscles);
         console.log("Fetched prime mover:", data);
@@ -20,12 +21,12 @@ export default function FullBody() {
       });
   }, [language]);
   if (!muscleArray) {
-    return <Spinner/>;
+    return <Spinner />;
   }
 
   return (
     <>
-      <WorkoutCarousel muscle ={muscleArray} />
+      <WorkoutCarousel muscle={muscleArray} />
     </>
   );
 }

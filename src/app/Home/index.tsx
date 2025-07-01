@@ -30,10 +30,8 @@ export default function Home() {
 
         {/* Workout Section */}
         <WorkoutSection />
-      </div>
 
-      {/* Why Us */}
-      <div className="bg-surface">
+        {/* Why Us */}
         <WhyUs />
       </div>
     </div>

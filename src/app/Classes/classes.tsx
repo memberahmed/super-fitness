@@ -1,32 +1,22 @@
 import HeadingTitle from "@/components/common/headingTitle";
-import bgworkout from "../../../../assets/images/workout/workoutbg.jpg";
-import workout from "../../../../assets/images/about-us/workout.png";
+import workout from "../../assets/images/about-us/workout.png";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import FullBody from "./_components/full-body";
 import { useTranslation } from "react-i18next";
 import { Dumbbell } from "lucide-react";
-import Chest from "./_components/chest";
-import Arm from "./_components/arm";
-import Shoulders from "./_components/shoulders";
-import Back from "./_components/back";
-import Legs from "./_components/legs";
-import Stomach from "./_components/stomach";
 
-export default function WorkoutSection() {
+import FullBody from "../Home/_components/workout/_components/full-body";
+import Chest from "../Home/_components/workout/_components/chest";
+import Arm from "../Home/_components/workout/_components/arm";
+import Shoulders from "../Home/_components/workout/_components/shoulders";
+import Back from "../Home/_components/workout/_components/back";
+import Legs from "../Home/_components/workout/_components/legs";
+import Stomach from "../Home/_components/workout/_components/stomach";
+
+export default function ClassesPage() {
   // Initialize translation function
   const { t } = useTranslation();
   return (
-    <section
-      className="relative"
-      style={{
-        backgroundImage: `url(${bgworkout})`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }}
-    >
-      {/* Blurry Background */}
-      <div className="w-full h-1/2 min-h-[414px] bg-[#FFFFFF99] backdrop-blur-md dark:bg-[#24242499] absolute inset-x-0 top-5 md:top-20"></div>
-
+    <section className="pt-24 text-charcoal bg-cloudy dark:bg-charcoal dark:text-cloudy">
       {/* Workout Section Content */}
       <div className="relative mx-auto px-4">
         {/* Section Header */}
