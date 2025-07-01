@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home, Login, Register, Layout } from "../app/index";
 import { Suspense } from "react";
 import AboutPage from "../app/About/about";
-import ProtectedRoute from "../components/common/ProdectRoute";
+import ProtectedRoute from "../components/common/ProtectedRoute";
 import ClassesPage from "@/app/Classes/classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
 
