@@ -36,7 +36,7 @@ export const routes = createBrowserRouter([
         index: true,
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
+            <Suspense fallback={<PagesLoader />}>
               <Home />
             </Suspense>
           </ProtectedRoute>
@@ -46,7 +46,7 @@ export const routes = createBrowserRouter([
         path: "about",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
+            <Suspense fallback={<PagesLoader />}>
               <AboutPage />
             </Suspense>
           </ProtectedRoute>
@@ -56,7 +56,7 @@ export const routes = createBrowserRouter([
         path: "classes",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
+            <Suspense fallback={<PagesLoader />}>
               <ClassesPage />
             </Suspense>
           </ProtectedRoute>
