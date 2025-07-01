@@ -4,12 +4,13 @@ import { Suspense } from "react";
 import AboutPage from "../app/About/about";
 import ProtectedRoute from "../components/common/ProdectRoute";
 import ClassesPage from "@/app/Classes/classes";
+import PagesLoader from "@/components/common/pages-loader/pages-loader";
 
 export const routes = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense fallback={<PagesLoader />}>
         <Login />
       </Suspense>
     ),
@@ -17,24 +18,25 @@ export const routes = createBrowserRouter([
   {
     path: "/register",
     element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense fallback={<PagesLoader />}>
         <Register />
       </Suspense>
     ),
   },
   {
-    path: "/",
+    path: "/login",
     element: (
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense fallback={<PagesLoader />}>
         <Layout />
       </Suspense>
     ),
+
     children: [
       {
         index: true,
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
+            <Suspense fallback={<PagesLoader />}>
               <Home />
             </Suspense>
           </ProtectedRoute>
@@ -44,8 +46,8 @@ export const routes = createBrowserRouter([
         path: "about",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
-              <AboutPage />
+      <Suspense fallback={<PagesLoader />}>
+      <AboutPage />
             </Suspense>
           </ProtectedRoute>
         ),
@@ -54,8 +56,8 @@ export const routes = createBrowserRouter([
         path: "classes",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<h1>Loading.......</h1>}>
-              <ClassesPage />
+      <Suspense fallback={<PagesLoader />}>
+      <ClassesPage />
             </Suspense>
           </ProtectedRoute>
         ),
