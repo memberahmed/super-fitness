@@ -57,7 +57,6 @@ export default function Login() {
   // Functions
   function onSubmit(data: z.infer<typeof FormSchema>) {
     login(data);
-    console.log(data);
   }
 
   // Function to toggel the password visibility
@@ -109,6 +108,7 @@ export default function Login() {
                         <div className="flex items-center w-full mb-4 rounded-full px-4 border border-muted-white py-2  h-12">
                           <Mail />
                           <Input
+                            type="email"
                             className="focus:ring-0 focus-visible:ring-0 border-none"
                             autoComplete="email"
                             placeholder={t("email-placeholder")}

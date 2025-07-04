@@ -22,7 +22,7 @@ export const routes = createBrowserRouter([
     ),
   },
   {
-    path: "/login",
+    path: "/",
     element: (
       <Suspense fallback={<PagesLoader />}>
         <Layout />
