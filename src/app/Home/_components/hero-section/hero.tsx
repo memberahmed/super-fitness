@@ -11,7 +11,7 @@ export default function HeroSection() {
   return (
     <>
       {/* ===== Hero Section ===== */}
-      <div className="grid grid-cols-1 md:grid-cols-2 font-rubik mt-[110px] md:mt-[200px] mx-4 md:mx-20">
+      <section className="grid grid-cols-1 md:grid-cols-2 font-rubik mt-[110px] md:mt-[200px] mx-4 md:mx-20">
         {/* ===== Left Content Section ===== */}
         <div className="left pt-0 text-charcoal dark:text-cloudy md:pt-16">
           {/* --- Heading --- */}
@@ -65,7 +65,7 @@ export default function HeroSection() {
         <div className="right">
           <img src={HeroImage} alt="Hero Image" className="mx-auto" />
         </div>
-      </div>
+      </section>
 
       {/* --- Marquee Section --- */}
       <AnnouncementBar />
