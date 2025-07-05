@@ -71,32 +71,36 @@ export default function DesktopHeader() {
         <LangToggle />
 
         {/* Login Button */}
-        <Button
-          variant={"flame"}
-          size={"default"}
-          className={`relative min-w-20 min-h-11 flex items-center gap-2 uppercase ${
-            i18n.dir() === "rtl" ? "flex-row-reverse" : ""
-          }`}
-        >
-          {t("login")}
-          <div>
-            <ArrowIconRight />
-          </div>
-        </Button>
+        <NavLink to={"/login"}>
+          <Button
+            variant={"flame"}
+            size={"default"}
+            className={`relative min-w-20 min-h-11 flex items-center gap-2 uppercase ${
+              i18n.dir() === "rtl" ? "flex-row-reverse" : ""
+            }`}
+          >
+            {t("login")}
+            <div>
+              <ArrowIconRight />
+            </div>
+          </Button>
+        </NavLink>
 
         {/* Sign Up Button */}
-        <Button
-          variant={"flameOutline"}
-          size={"default"}
-          className={`relative border-2 min-w-20 min-h-11 flex items-center gap-2 uppercase ${
-            i18n.dir() === "rtl" ? "flex-row-reverse" : ""
-          }`}
-        >
-          {t("sign-up")}
-          <div>
-            <ArrowIconRight />
-          </div>
-        </Button>
+        <NavLink to={"/register"}>
+          <Button
+            variant={"flameOutline"}
+            size={"default"}
+            className={`relative border-2 min-w-20 min-h-11 flex items-center gap-2 uppercase ${
+              i18n.dir() === "rtl" ? "flex-row-reverse" : ""
+            }`}
+          >
+            {t("sign-up")}
+            <div>
+              <ArrowIconRight />
+            </div>
+          </Button>
+        </NavLink>
       </div>
     </header>
   );

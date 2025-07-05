@@ -6,11 +6,17 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      letterSpacing: {
+        none: "0",
+      },
       backgroundImage: {
         "meal-bg-img": "url('/src/assets/images/meals/meals.jpg')",
         "breakfast-bg": "url('/src/assets/images/meals/breakfast.jpg')",
         "lunch-bg": "url('/src/assets/images/meals/lunch.jpg')",
         "dinner-bg": "url('/src/assets/images/meals/dinner.jpg')",
+        "ChatAi-bg": "url('/src/assets/images/ChatAi/chatAi.jpg')",
+        "model-bg": "url('/src/assets/images/ChatAi/model.jpg')",
+        "human-bg": "url('/src/assets/images/ChatAi/human.jpg')",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -22,6 +28,9 @@ module.exports = {
         baloo: ['"Baloo Thambi 2"', "cursive"],
       },
       colors: {
+        "light-gray": "#D3D3D3",
+        "orange-base": "#FF410033",
+        "muted-white": "#D9D9D9",
         flame: "#FF4100",
         cloudy: "#F3F3F4",
         charcoal: "#242424",
@@ -69,5 +78,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
 };
