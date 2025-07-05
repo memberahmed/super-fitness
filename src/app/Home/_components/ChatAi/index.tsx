@@ -10,8 +10,13 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 export default function ChatAi() {
+  // Translation
+  const { t } = useTranslation();
+
   const [message, setMessage] = useState([
     {
       content: {
@@ -26,75 +31,87 @@ export default function ChatAi() {
   ]);
 
   const onSubmit = async (e: FormDataEvent) => {
-    e.preventDefault();
-    if (!e.target[0].value) return;
-    setMessage([
-      ...message,
-      {
-        content: {
-          parts: [
-            {
-              text: e.target[0].value,
-            },
-          ],
-          role: "user",
-        },
-      },
-    ]);
-
-    // Call Ai
-    const { data } = await axios({
-      method: "post",
-      url: import.meta.env.VITE_URL_GEMNAI,
-      headers: {
-        "Content-Type": "application/json",
-        "X-goog-api-key": import.meta.env.VITE_API_KEY,
-      },
-      data: {
-        contents: [
-          {
+    try {
+      e.preventDefault();
+      if (!e.target[0].value) return;
+      setMessage([
+        ...message,
+        {
+          content: {
             parts: [
               {
-                text:
-                  "you're fitness trainer and your answer maximum in just two rows" +
-                  e.target[0].value,
+                text: e.target[0].value,
               },
             ],
+            role: "user",
           },
-        ],
-      },
-    }).catch((err) => {
-      console.log(err);
-    });
-    const { candidates } = data;
+        },
+      ]);
 
-    setMessage((prev) => [
-      ...prev,
-      {
-        content: {
-          parts: [
+      // Call Ai
+      const { data } = await axios({
+        method: "post",
+        url: import.meta.env.VITE_URL_GEMNAI,
+        headers: {
+          "Content-Type": "application/json",
+          "X-goog-api-key": import.meta.env.VITE_API_KEY,
+        },
+        data: {
+          contents: [
             {
-              text: candidates[0].content.parts[0].text,
+              parts: [
+                {
+                  text:
+                    "you're fitness trainer and your answer maximum in just two rows" +
+                    e.target[0].value,
+                },
+              ],
             },
           ],
-          role: "model",
         },
-      },
-    ]);
+      }).catch((err) => {
+        console.log(err);
+      });
+      const { candidates } = data;
 
-    e.target[0].value = "";
+      setMessage((prev) => [
+        ...prev,
+        {
+          content: {
+            parts: [
+              {
+                text: candidates[0].content.parts[0].text,
+              },
+            ],
+            role: "model",
+          },
+        },
+      ]);
+
+      e.target[0].value = "";
+    } catch (error) {
+      toast.error(t("something-went-wrong"));
+    }
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className=" fixed bottom-5 right-5" variant="outline">
-          Open Chat Ai
-        </Button>
+        <div className="fixed bottom-5 right-5 flex flex-col items-center hover:cursor-pointer z-10  ">
+          <img
+            className=" before:content-[''] before:absolute before:w-full before:h-full before:bg-flame "
+            src="src\assets\images/ChatAi/robot.png"
+            width={150}
+            alt="robot"
+          />
+          <span className="bg-flame !shadow-[20px_20px_120px_20px] !drop-shadow-2xl !shadow-flame px-4 py-2 rounded-full ">
+            {t("Hey Ask Me")}
+          </span>
+        </div>
       </DialogTrigger>
       <DialogContent className=" flex flex-col justify-between h-2/3 sm:max-w-[425px] bg-ChatAi-bg bg-cover bg-center border-flame before:border-flame before:content-[''] before:absolute before:w-full before:h-full before:backdrop-blur-[12.5px] before:bg-[#1A1A1A80] rounded-xl before:rounded-xl before:top-0 before:left-0">
         <DialogHeader className=" relative z-10">
-          <DialogTitle>Smart coach</DialogTitle>
+          <DialogTitle>{t("Smart coach")}</DialogTitle>
         </DialogHeader>
 
         <div className="relative z-10 overflow-y-auto scrollbar-none flex flex-col gap-2 h-full">
@@ -129,7 +146,7 @@ export default function ChatAi() {
             onSubmit={onSubmit}
             className="flex w-full z-10 justify-center gap-2 align-items-center"
           >
-            <Input name="message" placeholder="Ask Me Any Things" className=" border-white" />
+            <Input name="message" placeholder={t("Ask Me Any Things")} className=" border-white" />
             <Button type="submit">Send</Button>
           </form>
         </DialogFooter>

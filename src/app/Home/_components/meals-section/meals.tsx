@@ -9,7 +9,7 @@ export default function MealsSection() {
 
   return (
     <>
-      <div className=" relative bg-meal-bg-img bg-cover bg-center flex flex-col items-center ">
+      <div className=" relative   bg-meal-bg-img bg-cover bg-center flex flex-col items-center ">
         <div className=" before:content-[''] before:absolute before:w-full before:h-[414px] before:backdrop-blur-[86px] before:bg-[#FFFFFF99]  before:top-10 before:left-0"></div>
         <img src="/src/assets/images/meals/Healthy.svg" className="mt-3" alt="Healthy" />
         <span className="flex relative items-center  justify-center gap-2">
