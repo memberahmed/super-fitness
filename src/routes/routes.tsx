@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword } from "@/app/index";
+import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword, Profile } from "@/app/index";
 import { Suspense } from "react";
 import AboutPage from "../app/About/about";
 import ProtectedRoute from "../components/common/ProtectedRoute";
@@ -84,6 +84,16 @@ export const routes = createBrowserRouter([
           <ProtectedRoute>
             <Suspense fallback={<PagesLoader />}>
               <ClassesPage />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<PagesLoader />}>
+              <Profile />
             </Suspense>
           </ProtectedRoute>
         ),

@@ -10,10 +10,8 @@ export const OtpCodeForm = lazy(() => import("../components/features/components/
 export const createNewPassword = lazy(
   () => import("../components/features/components/create-new-password")
 );
+export const Profile = lazy(() => import("./profile"));
 
 // Main pages
 export const Layout = lazy(() => import("./layout"));
 export const Home = lazy(() => import("./Home"));
-
-// ChatAi component
-export const ChatAi = lazy(() => import("./Home/_components/ChatAi"));

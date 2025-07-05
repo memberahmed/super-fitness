@@ -17,6 +17,7 @@ module.exports = {
         "ChatAi-bg": "url('/src/assets/images/ChatAi/chatAi.jpg')",
         "model-bg": "url('/src/assets/images/ChatAi/model.jpg')",
         "human-bg": "url('/src/assets/images/ChatAi/human.jpg')",
+        "hero-bg": "url('/src/assets/images/hero-bg.png')",
       },
       borderRadius: {
         lg: "var(--radius)",
