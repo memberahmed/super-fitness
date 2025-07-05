@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword } from "../app/index";
+import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword } from "@/app/index";
 import { Suspense } from "react";
 import AboutPage from "../app/About/about";
 import ProtectedRoute from "../components/common/ProtectedRoute";

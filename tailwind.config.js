@@ -9,6 +9,15 @@ module.exports = {
       letterSpacing: {
         none: "0",
       },
+      backgroundImage: {
+        "meal-bg-img": "url('/src/assets/images/meals/meals.jpg')",
+        "breakfast-bg": "url('/src/assets/images/meals/breakfast.jpg')",
+        "lunch-bg": "url('/src/assets/images/meals/lunch.jpg')",
+        "dinner-bg": "url('/src/assets/images/meals/dinner.jpg')",
+        "ChatAi-bg": "url('/src/assets/images/ChatAi/chatAi.jpg')",
+        "model-bg": "url('/src/assets/images/ChatAi/model.jpg')",
+        "human-bg": "url('/src/assets/images/ChatAi/human.jpg')",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -69,5 +78,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
 };

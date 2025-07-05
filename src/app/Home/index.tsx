@@ -1,6 +1,8 @@
 import bgHero from "../../assets/images/hero-bg.png";
 import AboutUs from "./_components/about-us/about-us";
+import ChatAi from "./_components/ChatAi";
 import HeroSection from "./_components/hero-section/hero";
+import MealsSection from "./_components/meals-section/meals";
 import WhyUs from "./_components/why-us/why-us";
 import WorkoutSection from "./_components/workout/workout";
 
@@ -34,6 +36,8 @@ export default function Home() {
         {/* Why Us */}
         <WhyUs />
       </div>
+      <MealsSection />
+      <ChatAi />
     </div>
   );
 }
