@@ -26,7 +26,7 @@ export default function MealsSection() {
         </HeadingTitle>
 
         <div className=" flex flex-wrap justify-center relative w-full gap-5 z-10 container mb-10">
-          <div className=" bg-breakfast-bg relative bg-cover bg-center h-[399px] rounded-xl w-[404px]">
+          <div className=" bg-breakfast-bg hover:scale-105 duration-150 relative bg-cover bg-center h-[399px] rounded-xl w-[404px]">
             <div className="absolute bottom-0 rounded-b-xl  w-full h-[100px] bg-[#FFFFFF80] backdrop-blur-[58.2px]">
               <h3 className="text-2xl font-bold uppercase text-black m-2 font-baloo">Breakfast</h3>
               <span className="flex relative items-center w-28">
@@ -35,7 +35,7 @@ export default function MealsSection() {
               </span>
             </div>
           </div>
-          <div className="bg-lunch-bg bg-cover relative bg-center h-[399px] rounded-xl w-[404px]">
+          <div className="bg-lunch-bg bg-cover hover:scale-105 duration-150  relative bg-center h-[399px] rounded-xl w-[404px]">
             <div className="absolute bottom-0 rounded-b-xl  w-full h-[100px] bg-[#FFFFFF80] backdrop-blur-[58.2px]">
               <h3 className="text-2xl font-bold uppercase text-black m-2 font-baloo">lunch</h3>
               <span className="flex relative items-center w-28">
@@ -44,7 +44,7 @@ export default function MealsSection() {
               </span>
             </div>
           </div>
-          <div className="bg-dinner-bg bg-cover relative bg-center h-[399px] rounded-xl w-[404px]">
+          <div className="bg-dinner-bg bg-cover hover:scale-105 duration-150  relative bg-center h-[399px] rounded-xl w-[404px]">
             <div className="absolute bottom-0 rounded-b-xl  w-full h-[100px] bg-[#FFFFFF80] backdrop-blur-[58.2px]">
               <h3 className="text-2xl font-bold uppercase text-black m-2 font-baloo">Dinner</h3>
               <span className="flex relative items-center w-28">
