@@ -17,7 +17,7 @@ export default function ClassesPage() {
   const { t } = useTranslation();
 
   return (
-    <section className="pt-24 text-charcoal bg-cloudy dark:bg-charcoal dark:text-cloudy">
+    <section className="pt-24 text-charcoal bg-cloudy dark:bg-charcoal dark:text-cloudy relative">
       {/* Workout Section Content */}
       <div className="relative mx-auto px-4">
         {/* Section Header */}

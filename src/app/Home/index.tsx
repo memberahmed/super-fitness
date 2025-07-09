@@ -20,7 +20,7 @@ export default function Home() {
         >
           <div className="w-full h-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[35.1px]" />
         </div>
-        <div className="container mx-auto px-4 pt-24 md:pt-0 ">
+        <div className="pt-24 md:pt-0 w-full">
           <HeroSection />
         </div>
       </div>
