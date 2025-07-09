@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
-import useLogin from "./hooks/uselogin";
+import useLogin from "../Auth/hooks/use-login";
 import { useState } from "react";
 
 export default function Login() {
@@ -153,7 +153,7 @@ export default function Login() {
                 />
 
                 <NavLink
-                  to={"/forgot-password"}
+                  to={"/forget-password"}
                   className={
                     "underline self-end font-baloo font-bold leading-[140%] tracking-none text-base text-end text-flame mb-6"
                   }

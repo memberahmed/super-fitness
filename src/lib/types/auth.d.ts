@@ -13,7 +13,19 @@ declare type User = {
   createdAt: string;
 };
 
+// Login
 declare type LoginResponse = {
   token: string;
   user: User;
 };
+
+// Forget password
+declare type ForgetPasswordResponse = {
+  message: string;
+  info: string;
+};
+
+declare type CreateNewPasswordFeilds = {
+  email: string;
+  newPassword: string;
+}
