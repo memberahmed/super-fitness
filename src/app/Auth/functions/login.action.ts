@@ -1,4 +1,4 @@
-import { API } from "@/lib/constant";
+import { API } from "@/lib/constants/api.constant";
 import axios from "axios";
 
 export interface LoginForm {

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API } from "../constants/api.constant";
 
 export function getRandomPrimeMover(language = "en") {
   return axios
-    .get("https://fitness.elevateegy.com/api/v1/muscles/random", {
+    .get(`${API}/muscles/random`, {
       headers: {
         "Accept-Language": language,
       },
@@ -14,9 +15,29 @@ export function getRandomPrimeMover(language = "en") {
     });
 }
 
-export function getPrimeMoverMuscleByID(id: string, language: string = "en") {
-  const url = `https://fitness.elevateegy.com/api/v1/musclesGroup/by-muscle-group?muscleGroupId=${id}`;
+export function getPrimeMoverMuscleByID(id: string, language = "en") {
+  const url = `${API}/musclesGroup/by-muscle-group?muscleGroupId=${id}`;
 
+  return axios
+    .get(url, {
+      headers: {
+        "Accept-Language": language,
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      console.error("Error fetching muscles by group ID:", error);
+      throw error;
+    });
+}
+
+export function getExercisesByPrimeMoverMuscle(
+  primeMoverMuscleId: string,
+  difficultyLevelId: string,
+  language: string = "en"
+) {
+  const url = `${API}/exercises/by-muscle-difficulty?primeMoverMuscleId=${primeMoverMuscleId}&difficultyLevelId=${difficultyLevelId}`;
+  
   return axios
     .get(url, {
       headers: {

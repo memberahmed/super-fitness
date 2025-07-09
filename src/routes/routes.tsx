@@ -3,7 +3,7 @@ import { Home, Login, Register, Layout } from "../app/index";
 import { Suspense } from "react";
 import AboutPage from "../app/About/about";
 import ProtectedRoute from "../components/common/ProtectedRoute";
-import ClassesPage from "@/app/Classes/classes";
+import ClassesPage from "@/app/Classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
 
 export const routes = createBrowserRouter([

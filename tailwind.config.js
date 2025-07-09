@@ -25,6 +25,7 @@ module.exports = {
         flame: "#FF4100",
         cloudy: "#F3F3F4",
         charcoal: "#242424",
+        graphite: "#282828",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         surface: "hsl(var(--surface))",

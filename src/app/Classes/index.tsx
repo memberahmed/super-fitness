@@ -5,16 +5,17 @@ import { useTranslation } from "react-i18next";
 import { Dumbbell } from "lucide-react";
 
 import FullBody from "../Home/_components/workout/_components/full-body";
-import Chest from "../Home/_components/workout/_components/chest";
 import Arm from "../Home/_components/workout/_components/arm";
 import Shoulders from "../Home/_components/workout/_components/shoulders";
 import Back from "../Home/_components/workout/_components/back";
 import Legs from "../Home/_components/workout/_components/legs";
 import Stomach from "../Home/_components/workout/_components/stomach";
+import Chest from "../Home/_components/workout/_components/chest";
 
 export default function ClassesPage() {
   // Initialize translation function
   const { t } = useTranslation();
+
   return (
     <section className="pt-24 text-charcoal bg-cloudy dark:bg-charcoal dark:text-cloudy">
       {/* Workout Section Content */}
@@ -40,7 +41,7 @@ export default function ClassesPage() {
 
         <Tabs defaultValue="Full Body" className="w-full text-center font-baloo">
           {/* Tabs List */}
-          <TabsList className="bg-transparent gap-10">
+          <TabsList className="bg-transparent gap-10 mb-6">
             <TabsTrigger value="Full Body">{t("full-body")}</TabsTrigger>
             <TabsTrigger value="Chest">{t("chest")}</TabsTrigger>
             <TabsTrigger value="Arm">{t("arm")}</TabsTrigger>
