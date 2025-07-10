@@ -3,7 +3,7 @@ import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword, Profile } f
 import { Suspense } from "react";
 import AboutPage from "../app/About/about";
 import ProtectedRoute from "../components/common/ProtectedRoute";
-import ClassesPage from "@/app/Classes/classes";
+import ClassesPage from "@/app/Classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
 import CreateNewPassword from "@/components/features/components/create-new-password";
 

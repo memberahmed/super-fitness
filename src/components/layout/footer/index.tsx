@@ -3,8 +3,8 @@ import { Mail, Phone } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className=" container mx-auto p-4 ">
-      <div className="grid grid-cols-4 gap-4  justify-items-center">
+    <footer className="bg-cloudy text-charcoal dark:bg-charcoal dark:text-cloudy">
+      <div className="grid grid-cols-4 gap-4  justify-items-center pt-10 pb-20">
         <div className="col-span-4 sm:col-span-2  space-y-2  lg:col-span-1">
           {" "}
           <img src="/src/assets/images/logo.svg" alt="logo" />

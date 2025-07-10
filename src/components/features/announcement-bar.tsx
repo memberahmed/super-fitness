@@ -14,7 +14,7 @@ export default function AnnouncementBar() {
   ];
 
   return (
-    <div className="absolute inset-x-0 bg-flame text-2xl font-bold text-cloudy overflow-hidden uppercase z-10">
+    <div className=" bg-flame text-2xl font-bold text-cloudy overflow-hidden uppercase z-10">
       <Marquee
         loop={0}
         direction={localStorage.getItem("direction") === "rtl" ? "right" : "left"}

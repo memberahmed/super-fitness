@@ -5,24 +5,20 @@ import { Card } from "@/components/ui/card";
 import { ArrowIconLight } from "@/components/common/right-arrow-icon/ArrowIconRight";
 import { useTranslation } from "react-i18next";
 import defaultMuscleImage from "@/assets/images/workout/fallbackmuscle.jpg";
-import { useNavigate } from "react-router-dom";
 import type { Muscle } from "@/lib/types/muscles";
+import MuscleClasses from "@/app/Classes/muscle-classes";
+import Spinner from "@/routes/loadingSpinner";
 
-export default function EmblaWorkoutCarousel({muscle}: {muscle: Muscle[]}) {
-  // Initialize translation function
+export default function WorkoutCarousel({ muscle }: { muscle: Muscle[] }) {
   const { t } = useTranslation();
-
-  // Initialize navigation hook
-  const navigate = useNavigate();
-
-  // State variables
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [selectedMuscle, setSelectedMuscle] = useState<Muscle | null>(null);
+
 
   useEffect(() => {
     if (!emblaApi) return;
-
     setScrollSnaps(emblaApi.scrollSnapList());
     setSelectedIndex(emblaApi.selectedScrollSnap());
 
@@ -36,37 +32,37 @@ export default function EmblaWorkoutCarousel({muscle}: {muscle: Muscle[]}) {
     };
   }, [emblaApi]);
 
-  if (!muscle) {
-    return <div className="text-white text-center">Loading...</div>;
+  if (!muscle) return <Spinner />;
+
+  // 👉 Render MuscleClasses if a muscle is selected
+  if (selectedMuscle) {
+    return( <MuscleClasses
+      primeMoverMuscleId={selectedMuscle._id}
+      PrimeMoverMuscleImage={selectedMuscle.image}
+      MuscleName = {selectedMuscle.name}
+    /> );
+  
   }
 
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
       <div className="embla overflow-hidden" ref={emblaRef}>
         <div className="embla__container flex gap-4">
-          {muscle?.map((muscle) => (
+          {muscle.map((muscle) => (
             <div
-              className="embla__slide flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] px-2"
               key={muscle._id}
+              className="embla__slide flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.3333%] px-2"
             >
               <Card
-                onClick={() => navigate(`/classes/${muscle._id}`)}
+                onClick={() => setSelectedMuscle(muscle)} // 👈 Handle click
                 className="overflow-hidden cursor-pointer relative"
               >
                 <div className="card-img">
-                  {muscle.image ? (
-                    <img
-                      src={muscle.image}
-                      alt={muscle.name}
-                      className="w-[403px] h-[398px] object-cover"
-                    />
-                  ) : (
-                    <img
-                      src={defaultMuscleImage}
-                      alt={muscle.name}
-                      className="w-[403px] h-[398px] object-cover"
-                    />
-                  )}
+                  <img
+                    src={muscle.image || defaultMuscleImage}
+                    alt={muscle.name}
+                    className="w-[403px] h-[398px] object-cover"
+                  />
                 </div>
                 <div
                   dir={localStorage.getItem("direction") || "ltr"}

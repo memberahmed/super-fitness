@@ -19,3 +19,9 @@ export function ArrowIconLight() {
     />
   );
 }
+
+export function ArrowIconStraight() {
+  return (
+    <img src={ArrowIcon} alt="arrow-icon" className="bg-flame p-2 rounded-full hidden md:block rotate-45 border-cloudy border" />
+  );
+}
