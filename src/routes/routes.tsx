@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home, Login, Register, Layout, Profile, ForgetPassword } from "@/app/index";
 import { Suspense } from "react";
-import AboutPage from "../app/about/about";
+import AboutPage from "../app/About";
 import ProtectedRoute from "../components/common/ProtectedRoute";
-import ClassesPage from "@/app/classes";
+import ClassesPage from "@/app/Classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
+import Healthy from "@/app/Healthy";
 import ErrorBoundary from "@/components/error-boundry/error-boundry";
 import NotFound from "@/app/not-found/not-found-page";
 
@@ -98,6 +99,16 @@ export const routes = createBrowserRouter([
               </Suspense>
             </ProtectedRoute>
           </ErrorBoundary>
+        ),
+      },
+      {
+        path: "healthy",
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<PagesLoader />}>
+              <Healthy />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {

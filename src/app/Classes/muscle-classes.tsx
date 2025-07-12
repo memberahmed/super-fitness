@@ -31,10 +31,10 @@ export default function MuscleClasses({
   }, [videoUrl]);
 
   return (
-    <section className="mx-auto px-4 container">
-      <div className="grid grid-cols-6">
-        {/* Tabs Navigation */}
-        <div className="col-span-2 min-h-96 max-w-[409px] border-2 border-graphite rounded-3xl">
+    <section className="mx-auto px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-6 md:gap-4">
+        {/* Tabs Difficulty Level Navigation */}
+        <div className="col-span-1 lg:col-span-2 min-h-96 md:max-w-[409px] border-2 border-graphite rounded-3xl mx-auto">
           <Tabs defaultValue="Beginner" className="w-full text-center font-baloo">
             <TabsList className="bg-transparent flex justify-center gap-6 mt-5 mb-7">
               <TabsTrigger value="Beginner">{t("beginner")}</TabsTrigger>

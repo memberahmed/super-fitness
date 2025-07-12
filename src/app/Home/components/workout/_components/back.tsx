@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import WorkoutCarousel from "./workout-carousel";
 import { getPrimeMoverMuscleByID } from "@/lib/apis/random-prime-mover.api";
 import type { Muscle } from "@/lib/types/muscles";
-import Spinner from "@/routes/loadingSpinner";
+import PagesLoader from "@/components/common/pages-loader/pages-loader";
 
 export default function Back() {
   // State variables
@@ -21,7 +21,7 @@ export default function Back() {
       });
   }, [language]);
   if (!muscleArray) {
-    return <Spinner />;
+    return <PagesLoader />;
   }
 
   return (
