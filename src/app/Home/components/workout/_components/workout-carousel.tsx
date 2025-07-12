@@ -6,7 +6,7 @@ import { ArrowIconLight } from "@/components/common/right-arrow-icon/ArrowIconRi
 import { useTranslation } from "react-i18next";
 import defaultMuscleImage from "@/assets/images/workout/fallbackmuscle.jpg";
 import type { Muscle } from "@/lib/types/muscles";
-import MuscleClasses from "@/app/Classes/muscle-classes";
+import MuscleClasses from "@/app/classes/muscle-classes";
 import Spinner from "@/routes/loadingSpinner";
 
 export default function WorkoutCarousel({ muscle }: { muscle: Muscle[] }) {
@@ -15,7 +15,6 @@ export default function WorkoutCarousel({ muscle }: { muscle: Muscle[] }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [selectedMuscle, setSelectedMuscle] = useState<Muscle | null>(null);
-
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -36,12 +35,13 @@ export default function WorkoutCarousel({ muscle }: { muscle: Muscle[] }) {
 
   // 👉 Render MuscleClasses if a muscle is selected
   if (selectedMuscle) {
-    return( <MuscleClasses
-      primeMoverMuscleId={selectedMuscle._id}
-      PrimeMoverMuscleImage={selectedMuscle.image}
-      MuscleName = {selectedMuscle.name}
-    /> );
-  
+    return (
+      <MuscleClasses
+        primeMoverMuscleId={selectedMuscle._id}
+        PrimeMoverMuscleImage={selectedMuscle.image}
+        MuscleName={selectedMuscle.name}
+      />
+    );
   }
 
   return (

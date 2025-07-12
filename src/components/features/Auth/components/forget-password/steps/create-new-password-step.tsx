@@ -16,9 +16,9 @@ import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import useCreateNewPassword from "../Auth/hooks/use-create-new-password";
+import useCreateNewPassword from "../../../hooks/use-create-new-password";
 
-export default function CreateNewPassword() {
+export default function CreateNewPasswordStep() {
   //  Translation
   const { t } = useTranslation();
 
@@ -157,7 +157,7 @@ export default function CreateNewPassword() {
 
               {/* Submit Button */}
               <Button
-                disabled={isPending || !form.formState.isValid}
+                disabled={isPending}
                 className="w-full rounded-full h-10 text-white font-baloo font-extrabold text-base bg-flame mt-6"
                 type="submit"
               >
