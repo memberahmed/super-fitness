@@ -14,21 +14,20 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useOtpCode from "../Auth/hooks/use-otp-code";
-import { useNavigate } from "react-router-dom";
-import useForgetPassword from "../Auth/hooks/use-forget-password";
-import { toast } from "sonner";
+import useOtpCode from "../../../hooks/use-otp-code";
+import { useForgetPasswordContext } from "../../../context/forgget-password-provider";
+import useForgetPassword from "../../../hooks/use-forget-password";
 
-export default function OtpCodeForm() {
+export default function VerifyOtpStep() {
   //Translation
   const { t } = useTranslation();
-
-  // Navigation
-  const navigate = useNavigate();
 
   // Mutations
   const { otpCode, isPending } = useOtpCode();
   const { forgetPassword } = useForgetPassword();
+
+  // Context
+  const { email, goToStep } = useForgetPasswordContext();
 
   // Form & Validation
   const schema = z.object({
@@ -52,30 +51,12 @@ export default function OtpCodeForm() {
   const onSubmit = async (values: Inputs) => {
     try {
       await otpCode(values.otp);
-      navigate("/create-New-Password");
+      goToStep(3);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const backEndMessage = error?.response?.data?.error || t("something-went-wrong");
       form.setError("otp", { message: backEndMessage });
-    }
-  };
-
-  const resendOtpWithEmailCheck = () => {
-    let stored = null;
-    try {
-      stored = JSON.parse(localStorage.getItem("userEmail") || "null");
-    } catch {
-      localStorage.removeItem("userEmail");
-    }
-
-    const email = stored && stored.expires > Date.now() ? stored.value : null;
-    if (email) {
-      forgetPassword(email);
-    }
-    if (!email) {
-      localStorage.removeItem("userEmail");
-      toast.error("code is expired");
     }
   };
 
@@ -147,8 +128,9 @@ export default function OtpCodeForm() {
 
               {/* Resend Code Button */}
               <Button
-                disabled={isPending || !form.formState.isValid}
-                onClick={() => resendOtpWithEmailCheck()}
+                disabled={isPending}
+                type="button"
+                onClick={() => email && forgetPassword(email)}
                 variant={"link"}
                 className="underline text-flame -mt-1 mb-1 mx-auto block font-baloo text-base font-bold"
               >

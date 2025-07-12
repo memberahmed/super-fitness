@@ -1,11 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword, Profile } from "@/app/index";
+import { Home, Login, Register, Layout, Profile, ForgetPassword } from "@/app/index";
 import { Suspense } from "react";
-import AboutPage from "../app/About/about";
+import AboutPage from "../app/about/about";
 import ProtectedRoute from "../components/common/ProtectedRoute";
-import ClassesPage from "@/app/Classes";
+import ClassesPage from "@/app/classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
-import CreateNewPassword from "@/components/features/components/create-new-password";
 
 export const routes = createBrowserRouter([
   {
@@ -24,28 +23,12 @@ export const routes = createBrowserRouter([
       </Suspense>
     ),
   },
-  {
-    path: "/otp-code",
-    element: (
-      <Suspense fallback={<PagesLoader />}>
-        <OtpCodeForm />
-      </Suspense>
-    ),
-  },
+
   {
     path: "/forget-password",
     element: (
       <Suspense fallback={<PagesLoader />}>
         <ForgetPassword />
-      </Suspense>
-    ),
-  },
-
-  {
-    path: "/create-New-Password",
-    element: (
-      <Suspense fallback={<PagesLoader />}>
-        <CreateNewPassword />
       </Suspense>
     ),
   },

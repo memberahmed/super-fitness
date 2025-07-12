@@ -1,7 +1,5 @@
-import AboutUs from '../Home/_components/about-us/about-us'
+import AboutUs from "../home/components/about-us/about-us";
 
 export default function AboutPage() {
-  return (
-    <AboutUs/>
-  )
+  return <AboutUs />;
 }
