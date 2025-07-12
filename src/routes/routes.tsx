@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword, Profile } from "@/app/index";
 import { Suspense } from "react";
-import AboutPage from "../app/About/about";
+import AboutPage from "../app/About";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import ClassesPage from "@/app/Classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
 import CreateNewPassword from "@/components/features/components/create-new-password";
+import Healthy from "@/app/Healthy";
 
 export const routes = createBrowserRouter([
   {
@@ -94,6 +95,16 @@ export const routes = createBrowserRouter([
           <ProtectedRoute>
             <Suspense fallback={<PagesLoader />}>
               <Profile />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "healthy",
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<PagesLoader />}>
+              <Healthy />
             </Suspense>
           </ProtectedRoute>
         ),
