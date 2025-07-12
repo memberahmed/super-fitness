@@ -3,10 +3,23 @@ import { useTranslation } from "react-i18next";
 import UserDetails from "./user-details";
 import SelectLanguagePage from "./select-language";
 import DarkMood from "./dark-mood";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
   //Translation
   const { t } = useTranslation();
+
+  // Navigations
+  const navigate = useNavigate();
+
+  // Functions
+  const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/", { replace: true });
+    setTimeout(() => {
+      window.location.reload();
+    }, 50);
+  };
 
   return (
     <div className="min-h-screen bg-hero-bg bg-cover bg-center flex flex-col items-center justify-center before:content-[''] before:absolute before:w-full before:h-full before:backdrop-blur-[12.5px]   before:top-0 before:left-0 before:bg-[#FFFFFF99] before:dark:bg-[#24242499] backdrop-blur-[35.1px]">
@@ -48,8 +61,8 @@ export default function ProfilePage() {
         </div>
 
         {/* LogOut */}
-        <div className="w-[209px]  h-[168px] dark:border-white border-2 border-black rounded-xl flex flex-col items-center justify-center ">
-          <LogOut color="#ff4100" />
+        <div className="w-[209px] cursor-pointer h-[168px] dark:border-white border-2 border-black rounded-xl flex flex-col items-center justify-center ">
+          <LogOut color="#ff4100" onClick={() => logOut()} />
           <p className="text-flame text-xl font-bold">{t("LogOut")}</p>
         </div>
       </div>

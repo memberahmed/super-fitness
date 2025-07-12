@@ -1,6 +1,7 @@
 {
   "1200": "1200+",
   "3-groups-15-times": "3 Groups * 15 Times",
+  "404-not-found-page": "Not Found Page",
   "About": "About",
   "Ask Me Any Things": "Ask Me Any Things",
   "Beginner": "Beginner",
@@ -38,6 +39,7 @@
   "api-url-is-not-defined-in-env": "API URL is not defined in .env",
   "arm": "Arm",
   "back": "Back",
+  "back-to-home-page": "Back To Home Page",
   "beef": "Beef",
   "beginner": "Beginner",
   "best-way-possible": "best way possible",
@@ -103,6 +105,7 @@
   "stand-almost": "stand almost",
   "stomach": "Stomach",
   "success": "success",
+  "the-page-you-are-looking-for-dose-not-exist": "The page you are looking for dose not exist",
   "this-video-is-not-available": "This Video is not available",
   "transform-your-body-with-our": "Transform your body with our dynamic",
   "upcoming-workouts": "upcoming workouts",

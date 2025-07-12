@@ -1,102 +1,104 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, Login, Register, Layout, OtpCodeForm, ForgetPassword, Profile } from "@/app/index";
+import { Home, Login, Register, Layout, Profile, ForgetPassword } from "@/app/index";
 import { Suspense } from "react";
 import AboutPage from "../app/About";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import ClassesPage from "@/app/Classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
-import CreateNewPassword from "@/components/features/components/create-new-password";
 import Healthy from "@/app/Healthy";
+import ErrorBoundary from "@/components/error-boundry/error-boundry";
+import NotFound from "@/app/not-found/not-found-page";
 
 export const routes = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <Suspense fallback={<PagesLoader />}>
-        <Login />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/register",
-    element: (
-      <Suspense fallback={<PagesLoader />}>
-        <Register />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/otp-code",
-    element: (
-      <Suspense fallback={<PagesLoader />}>
-        <OtpCodeForm />
-      </Suspense>
-    ),
-  },
-  {
-    path: "/forget-password",
-    element: (
-      <Suspense fallback={<PagesLoader />}>
-        <ForgetPassword />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<PagesLoader />}>
+          <Login />
+        </Suspense>
+      </ErrorBoundary>
     ),
   },
 
   {
-    path: "/create-New-Password",
+    path: "/register",
     element: (
-      <Suspense fallback={<PagesLoader />}>
-        <CreateNewPassword />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<PagesLoader />}>
+          <Register />
+        </Suspense>
+      </ErrorBoundary>
+    ),
+  },
+
+  {
+    path: "/forget-password",
+    element: (
+      <ErrorBoundary>
+        <Suspense fallback={<PagesLoader />}>
+          <ForgetPassword />
+        </Suspense>
+      </ErrorBoundary>
     ),
   },
 
   {
     path: "/",
     element: (
-      <Suspense fallback={<PagesLoader />}>
-        <Layout />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<PagesLoader />}>
+          <Layout />
+        </Suspense>
+      </ErrorBoundary>
     ),
     children: [
       {
         index: true,
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={<PagesLoader />}>
-              <Home />
-            </Suspense>
-          </ProtectedRoute>
+          <ErrorBoundary>
+            <ProtectedRoute>
+              <Suspense fallback={<PagesLoader />}>
+                <Home />
+              </Suspense>
+            </ProtectedRoute>
+          </ErrorBoundary>
         ),
       },
       {
         path: "about",
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={<PagesLoader />}>
-              <AboutPage />
-            </Suspense>
-          </ProtectedRoute>
+          <ErrorBoundary>
+            <ProtectedRoute>
+              <Suspense fallback={<PagesLoader />}>
+                <AboutPage />
+              </Suspense>
+            </ProtectedRoute>
+          </ErrorBoundary>
         ),
       },
       {
         path: "classes",
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={<PagesLoader />}>
-              <ClassesPage />
-            </Suspense>
-          </ProtectedRoute>
+          <ErrorBoundary>
+            <ProtectedRoute>
+              <Suspense fallback={<PagesLoader />}>
+                <ClassesPage />
+              </Suspense>
+            </ProtectedRoute>
+          </ErrorBoundary>
         ),
       },
       {
         path: "profile",
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={<PagesLoader />}>
-              <Profile />
-            </Suspense>
-          </ProtectedRoute>
+          <ErrorBoundary>
+            <ProtectedRoute>
+              <Suspense fallback={<PagesLoader />}>
+                <Profile />
+              </Suspense>
+            </ProtectedRoute>
+          </ErrorBoundary>
         ),
       },
       {
@@ -108,6 +110,10 @@ export const routes = createBrowserRouter([
             </Suspense>
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

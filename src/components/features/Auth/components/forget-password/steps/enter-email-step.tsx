@@ -11,21 +11,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import useForgetPassword from "../Auth/hooks/use-forget-password";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import useForgetPassword from "../../../hooks/use-forget-password";
+import { useForgetPasswordContext } from "../../../context/forgget-password-provider";
 
-export default function ForgetPassword() {
+export default function EnterEmailStep() {
   // Translation
   const { t } = useTranslation();
 
-  // Navigation
-  const navigate = useNavigate();
-
   // Mutation
   const { forgetPassword, isPending } = useForgetPassword();
+
+  // Context
+  const { setEmail, goToStep } = useForgetPasswordContext();
 
   // Form & Validation
   const schema = z.object({
@@ -44,12 +44,8 @@ export default function ForgetPassword() {
   const onSubmit = async (values: Inputs) => {
     try {
       await forgetPassword(values.email);
-      localStorage.setItem(
-        "userEmail",
-        JSON.stringify({ value: values.email, expires: Date.now() + 2 * 60 * 1000 })
-      );
-      navigate("/otp-code");
-
+      setEmail(values.email);
+      goToStep(2);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const backEndMessage = error?.response?.data?.error || t("something-went-wrong");
@@ -106,7 +102,7 @@ export default function ForgetPassword() {
 
               {/* Submit Button */}
               <Button
-                disabled={isPending || !form.formState.isValid}
+                disabled={isPending}
                 className="w-full rounded-full h-10 text-white font-baloo font-extrabold text-base bg-flame"
                 type="submit"
               >

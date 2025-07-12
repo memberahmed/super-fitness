@@ -4,13 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslation } from "react-i18next";
 import { Dumbbell } from "lucide-react";
 
-import FullBody from "../Home/_components/workout/_components/full-body";
-import Arm from "../Home/_components/workout/_components/arm";
-import Shoulders from "../Home/_components/workout/_components/shoulders";
-import Back from "../Home/_components/workout/_components/back";
-import Legs from "../Home/_components/workout/_components/legs";
-import Stomach from "../Home/_components/workout/_components/stomach";
-import Chest from "../Home/_components/workout/_components/chest";
+import FullBody from "../home/components/workout/_components/full-body";
+import Arm from "../home/components/workout/_components/arm";
+import Shoulders from "../home/components/workout/_components/shoulders";
+import Back from "../home/components/workout/_components/back";
+import Legs from "../home/components/workout/_components/legs";
+import Stomach from "../home/components/workout/_components/stomach";
+import Chest from "../home/components/workout/_components/chest";
 
 export default function ClassesPage() {
   // Initialize translation function

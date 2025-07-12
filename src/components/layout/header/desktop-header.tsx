@@ -1,40 +1,35 @@
-import ArrowIconRight from "@/components/common/right-arrow-icon/ArrowIconRight";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { User } from "lucide-react"; // أيقونة المستخدم من lucide
+import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/features/toggle-dark-mode/theme-toggle";
 import LangToggle from "@/components/features/toggle-lang/lang-toggle";
-import { Button } from "@/components/ui/button";
+import ArrowIconRight from "@/components/common/right-arrow-icon/ArrowIconRight";
 import i18n from "@/lib/utils/i18n";
 import { useTranslation } from "react-i18next";
-import { Link, NavLink } from "react-router-dom";
 
 export default function DesktopHeader() {
-  //Translation
+  // Translations
   const { t } = useTranslation();
 
+  // State
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // UseEffect
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   // Navigation links
-  const nanLinks = [
-    {
-      id: 1,
-      name: t("Home"),
-      link: "/",
-    },
-    {
-      id: 2,
-      name: t("About"),
-      link: "/about",
-    },
-    {
-      id: 3,
-      name: t("Classes"),
-      link: "/classes",
-    },
-    {
-      id: 4,
-      name: t("Healthy"),
-      link: "/healthy",
-    },
+  const navLinks = [
+    { id: 1, name: t("Home"), link: "/" },
+    { id: 2, name: t("About"), link: "/about" },
+    { id: 3, name: t("Classes"), link: "/classes" },
+    { id: 4, name: t("Healthy"), link: "/healthy" },
   ];
 
-  // Function to handle active class styles
+  // Functions
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     `font-bold text-base ${isActive ? "text-flame" : "text-foreground"}`;
 
@@ -49,9 +44,9 @@ export default function DesktopHeader() {
         />
       </Link>
 
-      {/* Navigation Links */}
+      {/* Navigation */}
       <nav className="flex items-center gap-4 text-xl font-bold">
-        {nanLinks.map((link) => (
+        {navLinks.map((link) => (
           <NavLink
             key={link.id}
             to={link.link}
@@ -62,45 +57,49 @@ export default function DesktopHeader() {
         ))}
       </nav>
 
-      {/* Header buttons */}
+      {/* Header Actions */}
       <div className="flex gap-5 items-center text-base font-bold">
-        {/* Theme Toggle */}
         <ThemeToggle />
-
-        {/* Language Toggle */}
         <LangToggle />
 
-        {/* Login Button */}
-        <NavLink to={"/login"}>
-          <Button
-            variant={"flame"}
-            size={"default"}
-            className={`relative min-w-20 min-h-11 flex items-center gap-2 uppercase ${
-              i18n.dir() === "rtl" ? "flex-row-reverse" : ""
-            }`}
-          >
-            {t("login")}
-            <div>
-              <ArrowIconRight />
-            </div>
-          </Button>
-        </NavLink>
+        {!isLoggedIn ? (
+          <>
+            {/* Login */}
+            <NavLink to="/login">
+              <Button
+                variant="flame"
+                size="default"
+                className={`relative min-w-20 min-h-11 flex items-center gap-2 uppercase ${
+                  i18n.dir() === "rtl" ? "flex-row-reverse" : ""
+                }`}
+              >
+                {t("login")}
+                <ArrowIconRight />
+              </Button>
+            </NavLink>
 
-        {/* Sign Up Button */}
-        <NavLink to={"/register"}>
-          <Button
-            variant={"flameOutline"}
-            size={"default"}
-            className={`relative border-2 min-w-20 min-h-11 flex items-center gap-2 uppercase ${
-              i18n.dir() === "rtl" ? "flex-row-reverse" : ""
-            }`}
-          >
-            {t("sign-up")}
-            <div>
-              <ArrowIconRight />
+            {/* Sign Up */}
+            <NavLink to="/register">
+              <Button
+                variant="flameOutline"
+                size="default"
+                className={`relative border-2 min-w-20 min-h-11 flex items-center gap-2 uppercase ${
+                  i18n.dir() === "rtl" ? "flex-row-reverse" : ""
+                }`}
+              >
+                {t("sign-up")}
+                <ArrowIconRight />
+              </Button>
+            </NavLink>
+          </>
+        ) : (
+          // If logged in: Show user avatar or icon
+          <NavLink to="/profile">
+            <div className="w-12 h-12 rounded-full flex items-center justify-center bg-flame hover:shadow-md transition">
+              <User className="text-white w-5 h-5" />
             </div>
-          </Button>
-        </NavLink>
+          </NavLink>
+        )}
       </div>
     </header>
   );

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 export default function useOtpCode() {
     // Translation
     const { t } = useTranslation()
+
     // Mutation
     const mutate = useMutation({
         mutationFn: (resetCode: string) => otpCodeAction(resetCode),

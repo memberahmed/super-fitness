@@ -15,8 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
-import useLogin from "../Auth/hooks/use-login";
 import { useState } from "react";
+import useLogin from "../hooks/use-login";
 
 export default function Login() {
   //  Translation
@@ -57,7 +57,6 @@ export default function Login() {
   // Functions
   function onSubmit(data: z.infer<typeof FormSchema>) {
     login(data);
-    console.log(data);
   }
 
   // Function to toggel the password visibility

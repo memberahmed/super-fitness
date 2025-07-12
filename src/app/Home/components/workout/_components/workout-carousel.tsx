@@ -6,8 +6,13 @@ import { ArrowIconLight } from "@/components/common/right-arrow-icon/ArrowIconRi
 import { useTranslation } from "react-i18next";
 import defaultMuscleImage from "@/assets/images/workout/fallbackmuscle.jpg";
 import type { Muscle } from "@/lib/types/muscles";
+<<<<<<< HEAD:src/app/Home/_components/workout/_components/workout-carousel.tsx
 import MuscleClasses from "@/app/Classes/muscle-classes";
 import PagesLoader from "@/components/common/pages-loader/pages-loader";
+=======
+import MuscleClasses from "@/app/classes/muscle-classes";
+import Spinner from "@/routes/loadingSpinner";
+>>>>>>> c81bcafd2e078e9f6e5227ea8da75ac1eec88dc4:src/app/Home/components/workout/_components/workout-carousel.tsx
 
 export default function WorkoutCarousel({ muscle }: { muscle: Muscle[] }) {
   // Translation
