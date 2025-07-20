@@ -1,5 +1,4 @@
 import bgHero from "../../assets/images/hero-bg.png";
-import AgeCarousel from "../Auth/register-steps/age-from";
 import AboutUs from "./_components/about-us/about-us";
 import HeroSection from "./_components/hero-section/hero";
 import WhyUs from "./_components/why-us/why-us";
@@ -35,7 +34,6 @@ export default function Home() {
         {/* Why Us */}
         <WhyUs />
       </div>
-      <AgeCarousel />
     </div>
   );
 }

@@ -85,7 +85,7 @@ export default function ForgetPassword() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="sr-only">{t("email-labe")}</FormLabel>
+                    <FormLabel className="sr-only">{t("email-label")}</FormLabel>
                     <FormControl>
                       <div className="flex items-center w-full mb-4 rounded-full px-4 border border-muted-white py-2 h-12">
                         <Mail />

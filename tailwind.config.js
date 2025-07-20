@@ -9,6 +9,15 @@ module.exports = {
       letterSpacing: {
         none: "0",
       },
+      lineHeight: {
+        full: "100%",
+        140: "140%",
+      },
+      screens: {
+        // Custom screen height ranges for laptops
+        "laptop-sm": { raw: "(min-height: 700px) and (max-height: 800px)" },
+        "laptop-lg": { raw: "(min-height: 1080px)" },
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -19,6 +28,7 @@ module.exports = {
         baloo: ['"Baloo Thambi 2"', "cursive"],
       },
       colors: {
+        "motion-gray": "#b0b0b0",
         "light-gray": "#D3D3D3",
         "orange-base": "#FF410033",
         "muted-white": "#D9D9D9",

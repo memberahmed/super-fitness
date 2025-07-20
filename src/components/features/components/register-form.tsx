@@ -1,127 +1,159 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { useTranslation } from "react-i18next";
-import FormWrapper from "./register-steps/form-wraper";
-import UserForm from "./register-steps/user-form";
+import { useState } from "react";
+import { baseRegisterSchema } from "../../../lib/schemas/register-form-schema";
+import { Card, CardContent } from "@/components/ui/card";
+import Step1Form from "@/components/features/components/register-setps/user-form";
+import Step2Form from "@/components/features/components/register-setps/gender-form";
+import Step3Form from "@/components/features/components/register-setps/age-form";
+import Step4Form from "@/components/features/components/register-setps/weight-form";
+import Step5Form from "@/components/features/components/register-setps/height-form";
+import Step6Form from "@/components/features/components/register-setps/goal-form";
+import Step7Form from "@/components/features/components/register-setps/activity-level-form";
 import AuthStaticSection from "@/components/common/auth-static-section/auth-static-sec";
-import AgeCarousel from "./register-steps/age-from";
-``;
+import FormWrapper from "./register-setps/form-wraper";
+import { useTranslation } from "react-i18next";
+import axios from "axios";
+import useRegister from "../Auth/hooks/use-register";
 
-const genders = ["male", "female"] as const;
-const goals = [
-  "Gain weight",
-  "Lose weight",
-  "Get fitter",
-  "Gain more flexible",
-  "learn the basics",
-] as const;
-const activityLevels = ["level1", "level2", "level3", "level4", "level5"] as const;
-
-export default function Register() {
-  // ...
-
+const MultiStepForm = () => {
   const { t } = useTranslation();
-  const formSchema = z
-    .object({
-      firstName: z
-        .string({ required_error: "First name is required" })
-        .min(1, { message: "First name is required" })
-        .min(2, {
-          message: "First name must be at least 2 characters.",
-        })
-        .max(50, { message: "First name must be at most 50 characters." }),
-      lastName: z
-        .string({ required_error: "last name is required" })
-        .min(1, { message: "last name is required" })
-        .min(2, {
-          message: "last name must be at least 2 characters.",
-        })
-        .max(50, {
-          message: "last name must be at most 50 characters.",
-        }),
-      email: z.string({ required_error: "email is required" }).email({
-        message: "Please enter a valid email address.",
-      }),
-      password: z
-        .string({ required_error: "Password is required" })
-        .min(1, { message: "Password is required" })
-        .min(2, {
-          message: "password must be at least 2 characters.",
-        })
-        .max(50, { message: "Password must be at most 50 characters." })
-        .regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, {
-          message: t("password-regex"),
-        }),
-      rePassword: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-      }),
-      gender: z.enum(genders, { required_error: "Please select a gender" }),
-      height: z
-        .number()
-        .min(50, { message: "Height must be at least 50 cm." })
-        .max(250, { message: "Height must be at most 250 cm." }),
-      weight: z
-        .number()
-        .min(20, { message: "Weight must be at least 20 kg." })
-        .max(600, { message: "Weight must be at most 600 kg." }),
-      age: z
-        .number()
-        .min(1, { message: "Age must be at leat 1 year." })
-        .max(125, { message: "Age must be at most 125 years." }),
-      goal: z.enum(goals, { required_error: "Please select a goal" }),
-      activityLevel: z.enum(activityLevels, { required_error: "Please select an activity level" }),
-    })
-    .refine((data) => data.password === data.rePassword, {
-      message: "Passwords do not match",
-      path: ["rePassword"],
-    });
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      rePassword: "",
-      gender: undefined,
-      height: 0,
-      weight: 0,
-      age: 0,
-      goal: "Gain weight",
-      activityLevel: undefined,
-    },
+  const { register, error, isPending } = useRegister();
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    rePassword: "",
+    gender: undefined,
+    height: 150,
+    age: 25,
+    weight: 35,
+    goal: undefined,
+    activityLevel: undefined,
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  // Handle navigation to the next step
+  const handleNext = (data: any) => {
+    setFormData((prev) => ({ ...prev, ...data }));
+    setStep((prev) => prev + 1);
   };
 
-  return (
-    <main>
-      <section className="grid grid-cols-1 md:grid-cols-2 ">
-        {/* Right section */}
-        <div>
-          <AuthStaticSection />
-        </div>
+  // Handle navigation to the previous step
+  const handleBack = () => {
+    setStep((prev) => prev - 1);
+  };
 
-        {/* left section */}
-        <div className="flex flex-col items-center justify-center">
-          {/* Register form */}
-          <div className=" flex justify-center">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="">
-                <FormWrapper title="Crate your accout">
-                  <UserForm />
-                </FormWrapper>
-              </form>
-            </Form>
-          </div>
-        </div>
-      </section>
-    </main>
+  // Handle final submission
+  const handleSubmit = async (data: any) => {
+    const finalData = { ...formData, ...data };
+    const finalResult = baseRegisterSchema.safeParse(finalData);
+    if (!finalResult.success) {
+      console.log("Final validation failed:", finalResult.error);
+    } else {
+      console.log("Final form data:", finalResult.data);
+      register(finalResult.data);
+    }
+  };
+
+  // Progress bar
+  const currentStep = 1;
+  const totalSteps = 6;
+  const progressPercentage = (currentStep / totalSteps) * 100;
+  const circumference = 2 * Math.PI * 45;
+  const strokeDasharray = circumference;
+  const strokeDashoffset = circumference - (progressPercentage / 100) * circumference;
+
+  return (
+    <div className="flex flex-col md:flex-row justify-center max-h-screen items-center">
+      <div>
+        <AuthStaticSection />
+      </div>
+      <div className="min-w-[480px]   mx-auto p-4">
+        {error && <p className="text-red-500 p-3 font-semibold">{error.error}</p>}
+        <Card className="border-none">
+          <CardContent>
+            {/* Progress Bar */}
+            {step >= 2 && (
+              <div className="  flex items-center justify-center p-2">
+                <div className="relative w-16 h-w-16">
+                  {/* SVG Progress Circle */}
+                  <svg className="w-full h-full transform  -rotate-90" viewBox="0 0 100 100">
+                    {/* Background Circle */}
+                    <circle cx="50" cy="50" r="45" strokeWidth="6" fill="none" opacity="0.3" />
+
+                    {/* Progress Arc */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      stroke="#FF4100"
+                      strokeWidth="6"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray={strokeDasharray}
+                      strokeDashoffset={strokeDashoffset}
+                    />
+                  </svg>
+
+                  {/* Step Counter */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-baloo font-medium  text-2xl tracking-none  text-white">
+                      {step - 1}/{totalSteps}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Render the appropriate step */}
+            {step === 1 && <Step1Form onSubmit={handleNext} defaultValues={formData} />}
+            {step === 2 && (
+              <FormWrapper
+                title={t("auth-form-title")}
+                description={t("we-need-to-know-your-gender")}
+              >
+                <Step2Form
+                  onSubmit={handleNext}
+                  onBack={handleBack}
+                  defaultValues={
+                    formData.gender !== undefined ? { gender: formData.gender } : undefined
+                  }
+                />
+              </FormWrapper>
+            )}
+            {step === 3 && (
+              <Step3Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
+            )}
+            {step === 4 && (
+              <Step4Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
+            )}
+            {step === 5 && (
+              <Step5Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
+            )}
+            {step === 6 && (
+              <Step6Form
+                onSubmit={handleNext}
+                onBack={handleBack}
+                defaultValues={formData.goal !== undefined ? { goal: formData.goal } : undefined}
+              />
+            )}
+            {step === 7 && (
+              <Step7Form
+                onSubmit={handleSubmit}
+                onBack={handleBack}
+                isPending={isPending}
+                defaultValues={
+                  formData.activityLevel !== undefined
+                    ? { activityLevel: formData.activityLevel }
+                    : undefined
+                }
+              />
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
-}
+};
+
+export default MultiStepForm;

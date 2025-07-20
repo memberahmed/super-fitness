@@ -72,7 +72,7 @@ export default function Login() {
         </div>
 
         {/* left section */}
-        <div className="flex flex-col  items-center justify-center">
+        <div className="flex flex-col overflow-y-auto items-center justify-center">
           {/* Welcom massage */}
           <h2 className=" mb-10 flex flex-col items-center justify-center font-baloo font-normal text-2xl leading-[140%] tracking-none capitalize ">
             <span className="text-base ">{t("hey-there")}</span>
@@ -100,14 +100,14 @@ export default function Login() {
                   name="email"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      {/* Email label */}
-                      <FormLabel className="sr-only">{t("email-labe")}</FormLabel>
-
-                      {/* Input field */}
+                      <FormLabel htmlFor="email" className="sr-only">
+                        {t("email-label")}
+                      </FormLabel>
                       <FormControl>
                         <div className="flex items-center w-full mb-4 rounded-full px-4 border border-muted-white py-2  h-12">
                           <Mail />
                           <Input
+                            id="email"
                             type="email"
                             className="focus:ring-0 focus-visible:ring-0 border-none"
                             autoComplete="email"
@@ -128,12 +128,15 @@ export default function Login() {
                   render={({ field }) => (
                     <FormItem className="w-full">
                       {/* Password label */}
-                      <FormLabel className="sr-only">{t("passwrod-placeholder")}</FormLabel>
+                      <FormLabel htmlFor="password" className="sr-only">
+                        {t("passwrod-placeholder")}
+                      </FormLabel>
                       {/* password field */}
                       <FormControl>
-                        <div className="w-full  flex items-center  rounded-full px-4 border border-[#D9D9D9] py-2  h-12">
+                        <div className="w-full flex items-center  rounded-full px-4 border border-[#D9D9D9] py-2  h-12">
                           <Lock />
                           <Input
+                            id="password"
                             autoComplete="current-password"
                             className="focus:ring-0 focus-visible:ring-0 border-none"
                             placeholder={t("passwrod-placeholder")}

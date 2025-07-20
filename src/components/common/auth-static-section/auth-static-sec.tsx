@@ -1,7 +1,12 @@
 export default function AuthStaticSection() {
+  const lang = localStorage.getItem("lang");
   return (
     <>
-      <div className="min-h-screen  px-8 sm:border-r-2 sm:rtl:border-l-2 sm:border-orange-base/20 flex flex-col items-center justify-center ">
+      <div
+        className={`min-h-screen  px-8 ${
+          lang === "en" ? "md:border-r-2" : "md:border-l-2"
+        }   sm:border-orange-base/20 flex flex-col items-center justify-center `}
+      >
         {/* Logo photo */}
         <div className=" w-28 md:w-44  ">
           <img className="w-full h-full" src="\src\assets\images\logo-full.png" alt="logo photo" />
