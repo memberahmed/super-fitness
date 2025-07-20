@@ -1,7 +1,5 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"],
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
@@ -14,9 +12,18 @@ module.exports = {
         140: "140%",
       },
       screens: {
-        // Custom screen height ranges for laptops
         "laptop-sm": { raw: "(min-height: 700px) and (max-height: 800px)" },
         "laptop-lg": { raw: "(min-height: 1080px)" },
+      },
+      backgroundImage: {
+        "meal-bg-img": "url('/src/assets/images/meals/meals.jpg')",
+        "breakfast-bg": "url('/src/assets/images/meals/breakfast.jpg')",
+        "lunch-bg": "url('/src/assets/images/meals/lunch.jpg')",
+        "dinner-bg": "url('/src/assets/images/meals/dinner.jpg')",
+        "ChatAi-bg": "url('/src/assets/images/ChatAi/chatAi.jpg')",
+        "model-bg": "url('/src/assets/images/ChatAi/model.jpg')",
+        "human-bg": "url('/src/assets/images/ChatAi/human.jpg')",
+        "hero-bg": "url('/src/assets/images/hero-bg.png')",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -35,6 +42,7 @@ module.exports = {
         flame: "#FF4100",
         cloudy: "#F3F3F4",
         charcoal: "#242424",
+        graphite: "#282828",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         surface: "hsl(var(--surface))",
@@ -79,5 +87,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],
 };

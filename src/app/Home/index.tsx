@@ -1,8 +1,10 @@
 import bgHero from "../../assets/images/hero-bg.png";
-import AboutUs from "./_components/about-us/about-us";
-import HeroSection from "./_components/hero-section/hero";
-import WhyUs from "./_components/why-us/why-us";
-import WorkoutSection from "./_components/workout/workout";
+import AboutUs from "./components/about-us/about-us";
+import ChatAi from "./components/ChatAi";
+import HeroSection from "./components/hero-section/hero";
+import MealsSection from "./components/meals-section/meals";
+import WhyUs from "./components/why-us/why-us";
+import WorkoutSection from "./components/workout/workout";
 
 export default function Home() {
   return (
@@ -18,7 +20,7 @@ export default function Home() {
         >
           <div className="w-full h-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[35.1px]" />
         </div>
-        <div className="container mx-auto px-4 pt-24 md:pt-0 ">
+        <div className="pt-24 md:pt-0 w-full">
           <HeroSection />
         </div>
       </div>
@@ -34,6 +36,8 @@ export default function Home() {
         {/* Why Us */}
         <WhyUs />
       </div>
+      <MealsSection />
+      <ChatAi />
     </div>
   );
 }
