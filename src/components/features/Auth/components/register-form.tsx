@@ -93,6 +93,7 @@ export default function RegisterMultiStepForm() {
                 {/* Stepe 2  gender form */}
                 {step === 2 && (
                   <FormWrapper
+                    step={step}
                     error={error?.error}
                     title={t("auth-form-title")}
                     description={t("we-need-to-know-your-gender")}
@@ -107,6 +108,7 @@ export default function RegisterMultiStepForm() {
                 {/* Stepe 3  age form */}
                 {step === 3 && (
                   <FormWrapper
+                    step={step}
                     error={error?.error}
                     title={t("how-old-are-you")}
                     description={t("auth-form-descreption")}
@@ -118,6 +120,7 @@ export default function RegisterMultiStepForm() {
                 {/* Stepe 4  weight form */}
                 {step === 4 && (
                   <FormWrapper
+                    step={step}
                     error={error?.error}
                     title={t("what-is-your-weight")}
                     description={t("auth-form-descreption")}
@@ -129,6 +132,7 @@ export default function RegisterMultiStepForm() {
                 {/* Stepe 5  height form */}
                 {step === 5 && (
                   <FormWrapper
+                    step={step}
                     error={error?.error}
                     title={t("what-is-your-height")}
                     description={t("auth-form-descreption")}
@@ -140,6 +144,7 @@ export default function RegisterMultiStepForm() {
                 {/* Stepe 6  goal form */}
                 {step === 6 && (
                   <FormWrapper
+                    step={step}
                     error={error?.error}
                     title={t("what-is-your-goal")}
                     description={t("auth-form-descreption")}
@@ -155,6 +160,7 @@ export default function RegisterMultiStepForm() {
                 {/* Stepe 7  activity level form */}
                 {step === 7 && (
                   <FormWrapper
+                    step={step}
                     error={error?.error}
                     title={t("your-regular-physical-act")}
                     description={t("auth-form-descreption")}
