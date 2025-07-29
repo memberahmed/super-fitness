@@ -8,6 +8,7 @@ import PagesLoader from "@/components/common/pages-loader/pages-loader";
 import Healthy from "@/app/Healthy";
 import ErrorBoundary from "@/components/error-boundry/error-boundry";
 import NotFound from "@/app/not-found/not-found-page";
+import RouteGuard from "@/components/providers/components/route-guard";
 
 export const routes = createBrowserRouter([
   {
@@ -15,7 +16,9 @@ export const routes = createBrowserRouter([
     element: (
       <ErrorBoundary>
         <Suspense fallback={<PagesLoader />}>
-          <Login />
+          <RouteGuard>
+            <Login />
+          </RouteGuard>
         </Suspense>
       </ErrorBoundary>
     ),
@@ -26,7 +29,9 @@ export const routes = createBrowserRouter([
     element: (
       <ErrorBoundary>
         <Suspense fallback={<PagesLoader />}>
-          <Register />
+          <RouteGuard>
+            <Register />
+          </RouteGuard>
         </Suspense>
       </ErrorBoundary>
     ),
@@ -37,7 +42,9 @@ export const routes = createBrowserRouter([
     element: (
       <ErrorBoundary>
         <Suspense fallback={<PagesLoader />}>
-          <ForgetPassword />
+          <RouteGuard>
+            <ForgetPassword />
+          </RouteGuard>
         </Suspense>
       </ErrorBoundary>
     ),
@@ -95,7 +102,9 @@ export const routes = createBrowserRouter([
           <ErrorBoundary>
             <ProtectedRoute>
               <Suspense fallback={<PagesLoader />}>
-                <Profile />
+                <RouteGuard>
+                  <Profile />
+                </RouteGuard>
               </Suspense>
             </ProtectedRoute>
           </ErrorBoundary>

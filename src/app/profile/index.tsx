@@ -22,7 +22,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-hero-bg bg-cover bg-center flex flex-col items-center justify-center before:content-[''] before:absolute before:w-full before:h-full before:backdrop-blur-[12.5px]   before:top-0 before:left-0 before:bg-[#FFFFFF99] before:dark:bg-[#24242499] backdrop-blur-[35.1px]">
+    <div className="min-h-screen bg-hero-bg bg-cover bg-center flex flex-col items-center justify-center before:content-[''] before:absolute before:w-full before:h-full before:backdrop-blur-[12.5px]   before:top-0 before:left-0 before:bg-[#FFFFFF99] before:dark:bg-[#24242499] backdrop-blur-[35.1px] py-8 md:py-14">
       <div className="h-[100px] xl:h-[25px]"></div>
 
       {/* User Details */}
