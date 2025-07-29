@@ -1,5 +1,3 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { step4Schema } from "../../../../lib/schemas/register-form-schema";
@@ -9,21 +7,23 @@ import { Input } from "@/components/ui/input";
 import type { z } from "zod";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import MessageFeedback from "@/components/custom/messsgg-feedback";
+import MessweightFeedback from "@/components/custom/messsgg-feedback";
+import { useTranslation } from "react-i18next";
 
 interface Step4FormProps {
   onSubmit: (data: z.infer<typeof step4Schema>) => void;
   onBack: () => void;
-  defaultValues?: z.infer<typeof step4Schema>;
+  defaultValues: z.infer<typeof step4Schema>;
 }
 
-const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
+const Step4Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
+  const { t } = useTranslation();
   const [lang, setLang] = useState("");
-  const [selectedWeight, setSelectedWeight] = useState(50);
-  const minWeight = 10;
-  const maxWeight = 200;
+  const [selectedWeihgt, setSelectedWeihgt] = useState(defaultValues.weight);
+  const minWeihgt = 10;
+  const maxWeihgt = 120;
 
-  // Get language direction from localStorage
+  // Get languweight direction from localStorage
   useEffect(() => {
     const storedLang = localStorage.getItem("lang");
     setLang(storedLang || "en");
@@ -33,15 +33,15 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
 
   const form = useForm<z.infer<typeof step4Schema>>({
     resolver: zodResolver(step4Schema),
-    defaultValues: defaultValues || { weight: 35 },
+    defaultValues: defaultValues || { weight: 50 },
   });
 
-  // Generate array of visible numbers (only valid weight)
+  // Generate array of visible numbers (only valid weights)
   const getVisibleNumbers = () => {
     const numbers = [];
     for (let i = -2; i <= 2; i++) {
-      const weight = selectedWeight + i;
-      if (weight >= minWeight && weight <= maxWeight) {
+      const weight = selectedWeihgt + i;
+      if (weight >= minWeihgt && weight <= maxWeihgt) {
         numbers.push(weight);
       }
     }
@@ -51,18 +51,18 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
   // Find the index of the selected weight in the visible array
   const getSelectedIndex = () => {
     const visibleNumbers = getVisibleNumbers();
-    return visibleNumbers.findIndex((weight) => weight === selectedWeight);
+    return visibleNumbers.findIndex((weight) => weight === selectedWeihgt);
   };
 
   const handleNumberClick = (weight: number) => {
-    setSelectedWeight(weight);
+    setSelectedWeihgt(weight);
     form.setValue("weight", weight);
   };
 
   const getNumberStyle = (weight: number, isSelected: boolean) => {
     if (isSelected) {
       return {
-        fontSize: "3.5rem",
+        fontSize: "4rem",
         fontWeight: "700",
         color: "#FF4500",
         opacity: 1,
@@ -78,7 +78,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
 
     if (distance === 1) {
       return {
-        fontSize: "1.9rem",
+        fontSize: "2.5rem",
         fontWeight: "600",
         color: "#9CA3AF",
         opacity: 0.8,
@@ -87,7 +87,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
       };
     } else {
       return {
-        fontSize: "1.4rem",
+        fontSize: "1.8rem",
         fontWeight: "500",
         color: "#6B7280",
         opacity: 0.5,
@@ -97,16 +97,22 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
     }
   };
   const handlePrevious = () => {
-    if (selectedWeight > minWeight) {
-      setSelectedWeight(selectedWeight - 1);
-      form.setValue("weight", selectedWeight - 1);
+    if (selectedWeihgt > minWeihgt + 5) {
+      setSelectedWeihgt(selectedWeihgt - 5);
+      form.setValue("weight", selectedWeihgt);
+    } else {
+      setSelectedWeihgt(minWeihgt);
+      form.setValue("weight", minWeihgt);
     }
   };
 
   const handleNext = () => {
-    if (selectedWeight < maxWeight) {
-      setSelectedWeight(selectedWeight + 1);
-      form.setValue("weight", selectedWeight + 1);
+    if (selectedWeihgt < maxWeihgt - 5) {
+      setSelectedWeihgt(selectedWeihgt + 5);
+      form.setValue("weight", selectedWeihgt);
+    } else {
+      setSelectedWeihgt(maxWeihgt);
+      form.setValue("weight", maxWeihgt);
     }
   };
 
@@ -145,36 +151,39 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
           dir={isRTL ? "rtl" : "ltr"}
         >
           <div className="mb-8">
-            <p className="text-orange-500 text-center mb-6 font-medium">Kg</p>
+            <p className="text-orange-500 text-center mb-6 font-medium">{t("kg")}</p>
             <div className="relative flex items-center justify-center">
-              {/* Previous button */}
+              {/* Next button */}
               {isRTL ? (
                 <button
+                  // Arabic next button
                   type="button"
-                  onClick={handlePrevious}
-                  disabled={selectedWeight <= minWeight}
-                  className="hidden md:block  absolute -left-4 md:-left-7 p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  onClick={handleNext}
+                  disabled={selectedWeihgt >= maxWeihgt}
+                  className="absolute left-[-20px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronLeft size={24} />
                 </button>
               ) : (
                 <button
+                  // English next button
                   type="button"
                   onClick={handleNext}
-                  disabled={selectedWeight >= maxWeight}
-                  className="hidden md:block  absolute -right-4 md:-right-7 p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  disabled={selectedWeihgt >= maxWeihgt}
+                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronRight size={24} />
                 </button>
               )}
 
               {/* Numbers carousel */}
-              <div className="flex items-center justify-center h-24 relative overflow-hidden">
+              <div
+                className="flex items-center justify-center h-24 relative overflow-hidden"
+                style={{ width: "500px" }}
+              >
                 <div
                   className={`flex items-center justify-center ${
-                    isRTL
-                      ? "space-x-reverse space-x-1 md:space-x-2  lg:space-x-6 xl:space-x-8"
-                      : "space-x-1 md:space-x-2 lg:space-x-6 xl:space-x-8"
+                    isRTL ? "space-x-reverse space-x-8" : "space-x-8"
                   }`}
                 >
                   {visibleNumbers.map((weight) => (
@@ -182,13 +191,13 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
                       key={weight}
                       onClick={() => handleNumberClick(weight)}
                       style={{
-                        ...getNumberStyle(weight, weight === selectedWeight),
+                        ...getNumberStyle(weight, weight === selectedWeihgt),
                         lineHeight: "1",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         height: "100%",
-                        minWidth: "50px",
+                        minWidth: "60px",
                         willChange: "transform, opacity, color, font-size",
                       }}
                       className="transition-all duration-300 ease-out select-none flex items-center justify-center"
@@ -201,19 +210,21 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
               {/* Previous button */}
               {!isRTL ? (
                 <button
+                  // English prev button
                   type="button"
                   onClick={handlePrevious}
-                  disabled={selectedWeight <= minWeight}
-                  className="hidden md:block  absolute -left-4 md:-left-7 p-2 text-red-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  disabled={selectedWeihgt <= minWeihgt}
+                  className="absolute left-[-30px] p-2 text-gary-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronLeft size={24} />
                 </button>
               ) : (
                 <button
+                  // Arabic prev button
                   type="button"
-                  onClick={handleNext}
-                  disabled={selectedWeight >= maxWeight}
-                  className="hidden md:block absolute -right-4 md:-right-7 p-2 text-red-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  onClick={handlePrevious}
+                  disabled={selectedWeihgt <= minWeihgt}
+                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -231,7 +242,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
               />
             </div>
           </div>
-          <MessageFeedback messageKey={form.formState.errors.weight?.message} />
+          <MessweightFeedback messageKey={form.formState.errors.weight?.message} />
         </div>
 
         <FormField
@@ -239,12 +250,12 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
           name="weight"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">Weight</FormLabel>
+              <FormLabel className="sr-only">weight</FormLabel>
               <FormControl>
                 <Input
                   className="hidden"
                   type="number"
-                  placeholder="Enter your age"
+                  placeholder="Enter your weight"
                   {...field}
                   onChange={(e) => field.onChange(Number(e.target.value))}
                 />
@@ -266,17 +277,17 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
             {isRTL ? (
               <>
                 <ChevronRight className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             ) : (
               <>
                 <ChevronLeft className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             )}
           </Button>
           <Button className="bg-flame" type="submit">
-            Next
+            {t("next")}
             {isRTL ? (
               <ChevronLeft className="w-4 h-4 ml-2" />
             ) : (
@@ -289,4 +300,4 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
   );
 };
 
-export default Step5Form;
+export default Step4Form;

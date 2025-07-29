@@ -2,8 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { registerAction, type RegisterForm } from "../functions/register.action";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export default function useRegister() {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const { mutate, error, isPending } = useMutation<
@@ -25,7 +28,7 @@ export default function useRegister() {
     },
     onSuccess: (data: ApiResponse<LoginResponse>) => {
       if (!("error" in data)) {
-        toast("register is successful");
+        toast(t("register-is-successful"));
         navigate("/login");
       }
     },

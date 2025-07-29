@@ -1,11 +1,17 @@
 import { lazy, Suspense, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-
 import { useTranslation } from "react-i18next";
-import { baseRegisterSchema } from "@/lib/schemas/register-form-schema";
+import {
+  baseRegisterSchema,
+  step2Schema,
+  step6Schema,
+  step7Schema,
+} from "@/lib/schemas/register-form-schema";
 import useRegister from "../hooks/use-register";
 import FormWrapper from "../../components/register-setps/form-wraper";
 import AuthStaticSection from "@/components/common/auth-static-section/auth-static-sec";
+import type { RegisterForm } from "../functions/register.action";
+import type { z } from "zod";
 
 const Step1Form = lazy(() => import("@/components/features/components/register-setps/user-form"));
 const Step2Form = lazy(() => import("@/components/features/components/register-setps/gender-form"));
@@ -17,10 +23,19 @@ const Step7Form = lazy(
   () => import("@/components/features/components/register-setps/activity-level-form")
 );
 
-const MultiStepForm = () => {
+export default function RegisterMultiStepForm() {
+  // Translation
   const { t } = useTranslation();
+
+  // Hooks
   const { register, error, isPending } = useRegister();
+
+  // States
+
+  // State to manage the current step and form data
   const [step, setStep] = useState(1);
+
+  // Forms
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,7 +45,7 @@ const MultiStepForm = () => {
     gender: undefined,
     height: 150,
     age: 25,
-    weight: 35,
+    weight: 50,
     goal: undefined,
     activityLevel: undefined,
   });
@@ -47,118 +62,125 @@ const MultiStepForm = () => {
   };
 
   // Handle final submission
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: RegisterForm) => {
     const finalData = { ...formData, ...data };
     const finalResult = baseRegisterSchema.safeParse(finalData);
+    // Fial case
     if (!finalResult.success) {
       console.log("Final validation failed:", finalResult.error);
-    } else {
-      console.log("Final form data:", finalResult.data);
+    }
+    // Success case
+    else {
       register(finalResult.data);
     }
   };
 
-  // Progress bar
-  const currentStep = 1;
-  const totalSteps = 6;
-  const progressPercentage = (currentStep / totalSteps) * 100;
-  const circumference = 2 * Math.PI * 45;
-  const strokeDasharray = circumference;
-  const strokeDashoffset = circumference - (progressPercentage / 100) * circumference;
-
   return (
-    <div className="flex flex-col md:flex-row justify-center max-h-screen items-center">
-      <div>
-        <AuthStaticSection />
-      </div>
-      <div className="min-w-[480px]   mx-auto p-4">
-        {error && <p className="text-red-500 p-3 font-semibold">{error.error}</p>}
-        <Card className="border-none">
-          <CardContent>
-            {/* Progress Bar */}
-            {step >= 2 && (
-              <div className="  flex items-center justify-center p-2">
-                <div className="relative w-16 h-w-16">
-                  {/* SVG Progress Circle */}
-                  <svg className="w-full h-full transform  -rotate-90" viewBox="0 0 100 100">
-                    {/* Background Circle */}
-                    <circle cx="50" cy="50" r="45" strokeWidth="6" fill="none" opacity="0.3" />
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="">
+          <AuthStaticSection />
+        </div>
+        <div className=" flex items-center justify-center p-10">
+          <Card className="border-none">
+            <CardContent className="max-h-[550px] overflow-y-auto">
+              {/* Render the appropriate step */}
+              <Suspense fallback={<div className="text-center p-4">Loading...</div>}>
+                {step === 1 && (
+                  <Step1Form onSubmit={handleNext} defaultValues={formData} error={error?.error} />
+                )}
 
-                    {/* Progress Arc */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="45"
-                      stroke="#FF4100"
-                      strokeWidth="6"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeDasharray={strokeDasharray}
-                      strokeDashoffset={strokeDashoffset}
+                {/* Stepe 2  gender form */}
+                {step === 2 && (
+                  <FormWrapper
+                    error={error?.error}
+                    title={t("auth-form-title")}
+                    description={t("we-need-to-know-your-gender")}
+                  >
+                    <Step2Form
+                      onSubmit={handleNext}
+                      onBack={handleBack}
+                      defaultValues={{ gender: formData.gender! } as z.infer<typeof step2Schema>}
                     />
-                  </svg>
+                  </FormWrapper>
+                )}
+                {/* Stepe 3  age form */}
+                {step === 3 && (
+                  <FormWrapper
+                    error={error?.error}
+                    title={t("how-old-are-you")}
+                    description={t("auth-form-descreption")}
+                  >
+                    <Step3Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
+                  </FormWrapper>
+                )}
 
-                  {/* Step Counter */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-baloo font-medium  text-2xl tracking-none  text-white">
-                      {step - 1}/{totalSteps}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
+                {/* Stepe 4  weight form */}
+                {step === 4 && (
+                  <FormWrapper
+                    error={error?.error}
+                    title={t("what-is-your-weight")}
+                    description={t("auth-form-descreption")}
+                  >
+                    <Step4Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
+                  </FormWrapper>
+                )}
 
-            {/* Render the appropriate step */}
-            <Suspense fallback={<div className="text-center p-4">Loading...</div>}>
-              {step === 1 && <Step1Form onSubmit={handleNext} defaultValues={formData} />}
-              {step === 2 && (
-                <FormWrapper
-                  title={t("auth-form-title")}
-                  description={t("we-need-to-know-your-gender")}
-                >
-                  <Step2Form
-                    onSubmit={handleNext}
-                    onBack={handleBack}
-                    defaultValues={
-                      formData.gender !== undefined ? { gender: formData.gender } : undefined
-                    }
-                  />
-                </FormWrapper>
-              )}
-              {step === 3 && (
-                <Step3Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
-              )}
-              {step === 4 && (
-                <Step4Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
-              )}
-              {step === 5 && (
-                <Step5Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
-              )}
-              {step === 6 && (
-                <Step6Form
-                  onSubmit={handleNext}
-                  onBack={handleBack}
-                  defaultValues={formData.goal !== undefined ? { goal: formData.goal } : undefined}
-                />
-              )}
-              {step === 7 && (
-                <Step7Form
-                  onSubmit={handleSubmit}
-                  onBack={handleBack}
-                  isPending={isPending}
-                  defaultValues={
-                    formData.activityLevel !== undefined
-                      ? { activityLevel: formData.activityLevel }
-                      : undefined
-                  }
-                />
-              )}
-            </Suspense>
-          </CardContent>
-        </Card>
+                {/* Stepe 5  height form */}
+                {step === 5 && (
+                  <FormWrapper
+                    error={error?.error}
+                    title={t("what-is-your-height")}
+                    description={t("auth-form-descreption")}
+                  >
+                    <Step5Form onSubmit={handleNext} onBack={handleBack} defaultValues={formData} />
+                  </FormWrapper>
+                )}
+
+                {/* Stepe 6  goal form */}
+                {step === 6 && (
+                  <FormWrapper
+                    error={error?.error}
+                    title={t("what-is-your-goal")}
+                    description={t("auth-form-descreption")}
+                  >
+                    <Step6Form
+                      onSubmit={handleNext}
+                      onBack={handleBack}
+                      defaultValues={{ goal: formData.goal! } as z.infer<typeof step6Schema>}
+                    />
+                  </FormWrapper>
+                )}
+
+                {/* Stepe 7  activity level form */}
+                {step === 7 && (
+                  <FormWrapper
+                    error={error?.error}
+                    title={t("your-regular-physical-act")}
+                    description={t("auth-form-descreption")}
+                  >
+                    <Step7Form
+                      onSubmit={(data) =>
+                        handleSubmit({
+                          ...formData,
+                          ...data,
+                          gender: formData.gender!,
+                          goal: formData.goal!,
+                        })
+                      }
+                      onBack={handleBack}
+                      isPending={isPending}
+                      defaultValues={
+                        { activityLevel: formData.activityLevel! } as z.infer<typeof step7Schema>
+                      }
+                    />
+                  </FormWrapper>
+                )}
+              </Suspense>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
-};
-
-export default MultiStepForm;
+}

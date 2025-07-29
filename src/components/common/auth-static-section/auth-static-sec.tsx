@@ -3,9 +3,9 @@ export default function AuthStaticSection() {
   return (
     <>
       <div
-        className={`min-h-screen  px-8 ${
-          lang === "en" ? "md:border-r-2" : "md:border-l-2"
-        }   sm:border-orange-base/20 flex flex-col items-center justify-center `}
+        className={`h-screen ${
+          lang === "en" ? "before:right-0" : "before:left-0"
+        } before:absolute before:h-full before:w-0.5 before:bg-orange-base/20 flex flex-col relative items-center justify-center `}
       >
         {/* Logo photo */}
         <div className=" w-28 md:w-44  ">

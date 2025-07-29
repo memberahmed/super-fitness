@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 interface Step2FormProps {
   onSubmit: (data: z.infer<typeof step2Schema>) => void;
   onBack: () => void;
-  defaultValues?: z.infer<typeof step2Schema>;
+  defaultValues: z.infer<typeof step2Schema>;
 }
 
 const Step2Form = ({ onSubmit, onBack, defaultValues }: Step2FormProps) => {
@@ -41,7 +41,7 @@ const Step2Form = ({ onSubmit, onBack, defaultValues }: Step2FormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
         {/* Gender */}
         <FormField
           control={form.control}
@@ -125,17 +125,17 @@ const Step2Form = ({ onSubmit, onBack, defaultValues }: Step2FormProps) => {
             {isRTL ? (
               <>
                 <ChevronRight className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             ) : (
               <>
                 <ChevronLeft className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             )}
           </Button>
           <Button className="bg-flame" type="submit">
-            Next
+            {t("next")}
             {isRTL ? (
               <ChevronLeft className="w-4 h-4 ml-2" />
             ) : (

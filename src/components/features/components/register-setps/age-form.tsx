@@ -10,18 +10,20 @@ import type { z } from "zod";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import MessageFeedback from "@/components/custom/messsgg-feedback";
+import { useTranslation } from "react-i18next";
 
 interface Step3FormProps {
   onSubmit: (data: z.infer<typeof step3Schema>) => void;
   onBack: () => void;
-  defaultValues?: z.infer<typeof step3Schema>;
+  defaultValues: z.infer<typeof step3Schema>;
 }
 
 const Step3Form = ({ onSubmit, onBack, defaultValues }: Step3FormProps) => {
+  const { t } = useTranslation();
   const [lang, setLang] = useState("");
-  const [selectedAge, setSelectedAge] = useState(25);
+  const [selectedAge, setSelectedAge] = useState(defaultValues.age);
   const minAge = 10;
-  const maxAge = 90;
+  const maxAge = 100;
 
   // Get language direction from localStorage
   useEffect(() => {
@@ -33,7 +35,7 @@ const Step3Form = ({ onSubmit, onBack, defaultValues }: Step3FormProps) => {
 
   const form = useForm<z.infer<typeof step3Schema>>({
     resolver: zodResolver(step3Schema),
-    defaultValues: defaultValues || { age: 18 },
+    defaultValues: defaultValues,
   });
 
   // Generate array of visible numbers (only valid ages)
@@ -97,16 +99,22 @@ const Step3Form = ({ onSubmit, onBack, defaultValues }: Step3FormProps) => {
     }
   };
   const handlePrevious = () => {
-    if (selectedAge > minAge) {
-      setSelectedAge(selectedAge - 1);
-      form.setValue("age", selectedAge - 1);
+    if (selectedAge > minAge + 5) {
+      setSelectedAge(selectedAge - 5);
+      form.setValue("age", selectedAge);
+    } else {
+      setSelectedAge(minAge);
+      form.setValue("age", minAge);
     }
   };
 
   const handleNext = () => {
-    if (selectedAge < maxAge) {
-      setSelectedAge(selectedAge + 1);
-      form.setValue("age", selectedAge + 1);
+    if (selectedAge < maxAge - 5) {
+      setSelectedAge(selectedAge + 5);
+      form.setValue("age", selectedAge);
+    } else {
+      setSelectedAge(maxAge);
+      form.setValue("age", maxAge);
     }
   };
 
@@ -145,24 +153,28 @@ const Step3Form = ({ onSubmit, onBack, defaultValues }: Step3FormProps) => {
           dir={isRTL ? "rtl" : "ltr"}
         >
           <div className="mb-8">
-            <p className="text-orange-500 text-center mb-6 font-medium">Years Old</p>
+            <p className="text-orange-500 text-center mb-6 font-medium">{t("years-old")}</p>
             <div className="relative flex items-center justify-center">
-              {/* Previous button */}
+              {/* Next button */}
               {isRTL ? (
                 <button
+                  // Arabic next button
                   type="button"
-                  onClick={handlePrevious}
-                  disabled={selectedAge <= minAge}
-                  className="absolute left-[-20px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  onClick={handleNext}
+                  disabled={selectedAge >= maxAge}
+                  className={
+                    "absolute left-[-20px] p-2 text-gray-400 hover:text-white disabled:opacity-30  z-10 transition-opacity duration-200"
+                  }
                 >
                   <ChevronLeft size={24} />
                 </button>
               ) : (
+                // English Next button
                 <button
                   type="button"
                   onClick={handleNext}
                   disabled={selectedAge >= maxAge}
-                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30  z-10 transition-opacity duration-200"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -199,22 +211,25 @@ const Step3Form = ({ onSubmit, onBack, defaultValues }: Step3FormProps) => {
                   ))}
                 </div>
               </div>
-              {/* Previous button */}
+
+              {/* Prev button */}
               {!isRTL ? (
                 <button
+                  // English Prev button
                   type="button"
                   onClick={handlePrevious}
                   disabled={selectedAge <= minAge}
-                  className="absolute left-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  className="absolute text-gray-400 left-[-30px] p-2  hover:text-white disabled:opacity-30  z-10 transition-opacity duration-200"
                 >
                   <ChevronLeft size={24} />
                 </button>
               ) : (
                 <button
+                  // Arabic prev button
                   type="button"
-                  onClick={handleNext}
-                  disabled={selectedAge >= maxAge}
-                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  onClick={handlePrevious}
+                  disabled={selectedAge <= minAge}
+                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30  z-10 transition-opacity duration-200"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -267,17 +282,17 @@ const Step3Form = ({ onSubmit, onBack, defaultValues }: Step3FormProps) => {
             {isRTL ? (
               <>
                 <ChevronRight className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             ) : (
               <>
                 <ChevronLeft className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             )}
           </Button>
           <Button className="bg-flame" type="submit">
-            Next
+            {t("next")}
             {isRTL ? (
               <ChevronLeft className="w-4 h-4 ml-2" />
             ) : (

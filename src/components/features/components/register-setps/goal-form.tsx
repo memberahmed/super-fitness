@@ -33,7 +33,7 @@ const Step6Form = ({ onSubmit, onBack, defaultValues }: Step6FormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-4">
         <FormField
           control={form.control}
           name="goal"
@@ -41,14 +41,15 @@ const Step6Form = ({ onSubmit, onBack, defaultValues }: Step6FormProps) => {
             <FormItem className="space-y-3">
               <FormControl>
                 <RadioGroup
+                  dir={isRTL ? "rtl" : "ltr"}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col  space-y-1"
+                  className="w-full sm:w-[300px] flex flex-col space-y-1"
                 >
                   {GOALS.map((goal) => (
                     <FormItem
                       key={goal}
-                      className={`flex cursor-pointer items-center justify-between py-2 px-4 rounded-3xl h-12 ${
+                      className={`w-full flex cursor-pointer items-center justify-between py-2 px-4 rounded-3xl h-10 laptop-lg:h-12 ${
                         field.value === goal ? "text-flame" : "text-muted-white"
                       } font-bold  backdrop-blur-sm text-base tracking-none leading-140 capitalize bg-light-gray/20 border border-muted-white transition-colors duration-300 ease-in-out gap-3`}
                     >

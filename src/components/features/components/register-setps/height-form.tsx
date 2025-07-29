@@ -1,5 +1,3 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { step5Schema } from "../../../../lib/schemas/register-form-schema";
@@ -9,21 +7,23 @@ import { Input } from "@/components/ui/input";
 import type { z } from "zod";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import MessageFeedback from "@/components/custom/messsgg-feedback";
+import MessheightFeedback from "@/components/custom/messsgg-feedback";
+import { useTranslation } from "react-i18next";
 
-interface Step4FormProps {
+interface Step5FormProps {
   onSubmit: (data: z.infer<typeof step5Schema>) => void;
   onBack: () => void;
-  defaultValues?: z.infer<typeof step5Schema>;
+  defaultValues: z.infer<typeof step5Schema>;
 }
 
-const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
+const Step5Form = ({ onSubmit, onBack, defaultValues }: Step5FormProps) => {
+  const { t } = useTranslation();
   const [lang, setLang] = useState("");
-  const [selectedHeight, setSelectedHeight] = useState(150);
-  const minHeight = 50;
+  const [selectedHeight, setSelectedHeight] = useState(defaultValues.height);
+  const minHeight = 40;
   const maxHeight = 250;
 
-  // Get language direction from localStorage
+  // Get languheight direction from localStorage
   useEffect(() => {
     const storedLang = localStorage.getItem("lang");
     setLang(storedLang || "en");
@@ -33,10 +33,10 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
 
   const form = useForm<z.infer<typeof step5Schema>>({
     resolver: zodResolver(step5Schema),
-    defaultValues: defaultValues || { height: 18 },
+    defaultValues: defaultValues || { height: 120 },
   });
 
-  // Generate array of visible numbers (only valid height)
+  // Generate array of visible numbers (only valid heights)
   const getVisibleNumbers = () => {
     const numbers = [];
     for (let i = -2; i <= 2; i++) {
@@ -62,7 +62,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
   const getNumberStyle = (height: number, isSelected: boolean) => {
     if (isSelected) {
       return {
-        fontSize: "3.5rem",
+        fontSize: "4rem",
         fontWeight: "700",
         color: "#FF4500",
         opacity: 1,
@@ -78,7 +78,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
 
     if (distance === 1) {
       return {
-        fontSize: "1.9rem",
+        fontSize: "2.5rem",
         fontWeight: "600",
         color: "#9CA3AF",
         opacity: 0.8,
@@ -87,7 +87,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
       };
     } else {
       return {
-        fontSize: "1.4rem",
+        fontSize: "1.8rem",
         fontWeight: "500",
         color: "#6B7280",
         opacity: 0.5,
@@ -97,16 +97,22 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
     }
   };
   const handlePrevious = () => {
-    if (selectedHeight > minHeight) {
-      setSelectedHeight(selectedHeight - 1);
-      form.setValue("height", selectedHeight - 1);
+    if (selectedHeight > minHeight + 5) {
+      setSelectedHeight(selectedHeight - 5);
+      form.setValue("height", selectedHeight);
+    } else {
+      setSelectedHeight(maxHeight);
+      form.setValue("height", maxHeight);
     }
   };
 
   const handleNext = () => {
-    if (selectedHeight < maxHeight) {
-      setSelectedHeight(selectedHeight + 1);
-      form.setValue("height", selectedHeight + 1);
+    if (selectedHeight < maxHeight - 5) {
+      setSelectedHeight(selectedHeight + 5);
+      form.setValue("height", selectedHeight);
+    } else {
+      setSelectedHeight(maxHeight);
+      form.setValue("height", maxHeight);
     }
   };
 
@@ -145,36 +151,39 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
           dir={isRTL ? "rtl" : "ltr"}
         >
           <div className="mb-8">
-            <p className="text-orange-500 text-center mb-6 font-medium">CM</p>
+            <p className="text-orange-500 text-center mb-6 font-medium">{t("cm")}</p>
             <div className="relative flex items-center justify-center">
-              {/* Previous button */}
+              {/* Next button */}
               {isRTL ? (
                 <button
+                  // Arabic next button
                   type="button"
-                  onClick={handlePrevious}
-                  disabled={selectedHeight <= minHeight}
-                  className="hidden md:block  absolute -left-4 md:-left-7 p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  onClick={handleNext}
+                  disabled={selectedHeight >= maxHeight}
+                  className="absolute left-[-20px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronLeft size={24} />
                 </button>
               ) : (
                 <button
+                  // English next button
                   type="button"
                   onClick={handleNext}
                   disabled={selectedHeight >= maxHeight}
-                  className="hidden md:block  absolute -right-4 md:-right-7 p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronRight size={24} />
                 </button>
               )}
 
               {/* Numbers carousel */}
-              <div className="flex items-center justify-center h-24 relative overflow-hidden">
+              <div
+                className="flex items-center justify-center h-24 relative overflow-hidden"
+                style={{ width: "500px" }}
+              >
                 <div
                   className={`flex items-center justify-center ${
-                    isRTL
-                      ? "space-x-reverse space-x-1 md:space-x-2  lg:space-x-6 xl:space-x-8"
-                      : "space-x-1 md:space-x-2 lg:space-x-6 xl:space-x-8"
+                    isRTL ? "space-x-reverse space-x-8" : "space-x-8"
                   }`}
                 >
                   {visibleNumbers.map((height) => (
@@ -188,7 +197,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
                         alignItems: "center",
                         justifyContent: "center",
                         height: "100%",
-                        minWidth: "50px",
+                        minWidth: "60px",
                         willChange: "transform, opacity, color, font-size",
                       }}
                       className="transition-all duration-300 ease-out select-none flex items-center justify-center"
@@ -201,19 +210,21 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
               {/* Previous button */}
               {!isRTL ? (
                 <button
+                  // Arabic prev button
                   type="button"
                   onClick={handlePrevious}
                   disabled={selectedHeight <= minHeight}
-                  className="hidden md:block  absolute -left-4 md:-left-7 p-2 text-red-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  className="absolute left-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronLeft size={24} />
                 </button>
               ) : (
                 <button
+                  // English prev button
                   type="button"
                   onClick={handleNext}
-                  disabled={selectedHeight >= maxHeight}
-                  className="hidden md:block absolute -right-4 md:-right-7 p-2 text-red-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
+                  disabled={selectedHeight <= minHeight}
+                  className="absolute right-[-30px] p-2 text-gray-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed z-10 transition-opacity duration-200"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -231,7 +242,7 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
               />
             </div>
           </div>
-          <MessageFeedback messageKey={form.formState.errors.height?.message} />
+          <MessheightFeedback messageKey={form.formState.errors.height?.message} />
         </div>
 
         <FormField
@@ -239,12 +250,12 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
           name="height"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">Age</FormLabel>
+              <FormLabel className="sr-only">height</FormLabel>
               <FormControl>
                 <Input
                   className="hidden"
                   type="number"
-                  placeholder="Enter your age"
+                  placeholder="Enter your height"
                   {...field}
                   onChange={(e) => field.onChange(Number(e.target.value))}
                 />
@@ -266,17 +277,17 @@ const Step5Form = ({ onSubmit, onBack, defaultValues }: Step4FormProps) => {
             {isRTL ? (
               <>
                 <ChevronRight className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             ) : (
               <>
                 <ChevronLeft className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             )}
           </Button>
           <Button className="bg-flame" type="submit">
-            Next
+            {t("next")}
             {isRTL ? (
               <ChevronLeft className="w-4 h-4 ml-2" />
             ) : (

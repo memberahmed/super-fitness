@@ -1,16 +1,14 @@
-import { useTranslation } from "react-i18next";
-
 type FormWrapperProps = {
   children: React.ReactNode;
   title: string;
   description?: string;
+  error?: string;
 };
 
-export default function FormWrapper({ children, title, description }: FormWrapperProps) {
-  const { t } = useTranslation();
+export default function FormWrapper({ children, title, description, error }: FormWrapperProps) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center w-full h-full p-4">
+      <div className="flex flex-col items-center justify-center  p-4">
         {/* Welcom massage */}
         <h2 className=" text-center font-baloo font-extrabold text-3xl md:text-[48px]  leading-[140%] tracking-none capitalize ">
           {title}
@@ -20,8 +18,9 @@ export default function FormWrapper({ children, title, description }: FormWrappe
             {description}
           </p>
         )}
+        {error && <p className="text-red-500 p-3  font-semibold">{error}</p>}
       </div>
-      <div className="flex items-center justify-center">{children}</div>
+      <div className="flex items-center justify-center ">{children}</div>
     </>
   );
 }

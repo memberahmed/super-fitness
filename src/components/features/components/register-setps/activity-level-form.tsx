@@ -43,14 +43,15 @@ const Step6Form = ({ onSubmit, onBack, defaultValues, isPending }: Step6FormProp
             <FormItem className="space-y-3">
               <FormControl>
                 <RadioGroup
+                  dir={isRTL ? "rtl" : "ltr"}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1"
+                  className="w-full sm:w-[300px] flex flex-col space-y-1"
                 >
                   {ACTIVITYlEVEL.map((level) => (
                     <FormItem
                       key={level}
-                      className={`flex cursor-pointer items-center justify-between py-2 px-4 rounded-3xl h-12 ${
+                      className={`flex cursor-pointer items-center justify-between py-2 px-4 rounded-3xl  h-10 laptop-lg:h-12 ${
                         field.value === level ? "text-flame" : "text-muted-white"
                       } font-bold  backdrop-blur-sm text-base tracking-none leading-140 capitalize bg-light-gray/20 border border-muted-white transition-colors duration-300 ease-in-out gap-3`}
                     >
@@ -90,17 +91,17 @@ const Step6Form = ({ onSubmit, onBack, defaultValues, isPending }: Step6FormProp
             {isRTL ? (
               <>
                 <ChevronRight className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             ) : (
               <>
                 <ChevronLeft className="w-4 h-4 mr-2" />
-                Back
+                {t("back")}
               </>
             )}
           </Button>
           <Button className="bg-flame" type="submit">
-            {!isPending ? "Finish" : "Submitting..."}
+            {!isPending ? t("finish") : t("submitting")}
             {isRTL ? (
               <ChevronLeft className="w-4 h-4 ml-2" />
             ) : (
