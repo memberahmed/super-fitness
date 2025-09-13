@@ -61,8 +61,11 @@ export default function ProfilePage() {
         </div>
 
         {/* LogOut */}
-        <div className="w-[209px] cursor-pointer h-[168px] dark:border-white border-2 border-black rounded-xl flex flex-col items-center justify-center ">
-          <LogOut color="#ff4100" onClick={() => logOut()} />
+        <div
+          onClick={() => logOut()}
+          className="w-[209px] cursor-pointer h-[168px] dark:border-white border-2 border-black rounded-xl flex flex-col items-center justify-center "
+        >
+          <LogOut color="#ff4100" />
           <p className="text-flame text-xl font-bold">{t("LogOut")}</p>
         </div>
       </div>

@@ -1,10 +1,15 @@
 import { Switch } from "@/components/ui/switch";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function DarkMood() {
+  // Translation
+  const { t } = useTranslation();
+
   // State
   const [darkMode, setDarkMode] = useState(false);
+
   // DarkMode
   const toggleDarkMode = () => {
     const newMode = !darkMode;
@@ -19,11 +24,12 @@ export default function DarkMood() {
     document.documentElement.classList.toggle("dark", isDark);
     setDarkMode(isDark);
   }, []);
+
   return (
     <div className="w-[209px]  h-[168px] dark:border-white border-2 border-black rounded-xl flex flex-col items-center justify-center ">
       {darkMode ? <Sun color="#ff4100" /> : <Moon color="#ff4100" />}
       <p className="text-black my-3 dark:text-white text-xl font-bold">
-        Mood (<span className="text-flame">{darkMode ? "Dark" : "Light"}</span>){" "}
+        {t("mood")} (<span className="text-flame">{darkMode ? "Dark" : "Light"}</span>){" "}
       </p>
       <Switch checked={darkMode} className="!bg-flame" onCheckedChange={toggleDarkMode} />
     </div>

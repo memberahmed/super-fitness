@@ -36,7 +36,7 @@ const Step1Form = ({ onSubmit, defaultValues, error }: Step1FormProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-2 laptop-lg:space-y-4 flex items-center justify-center flex-col space-x-2 border  rounded-[50px]  py-5 laptop-lg:py-10  px-10"
+          className="max-w-[486px] w-full space-y-2 laptop-lg:space-y-4 flex items-center justify-center flex-col space-x-2 border  rounded-[50px]  py-5 laptop-lg:py-10  px-10"
         >
           <h3 className="laptop-sm:mb-2 laptop-lg:mb-6 text-center font-baloo text-xl laptop-lg:text-2xl font-extrabold tracking-none leading-140 capitalize">
             {t("register")}

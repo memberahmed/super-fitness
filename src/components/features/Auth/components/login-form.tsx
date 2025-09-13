@@ -85,10 +85,10 @@ export default function Login() {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="md:min-w[400px] xl:w-[486px]  border border-light-gray rounded-[50px] px-10 pt-16 pb-10 flex flex-col items-center justify-center space-y-4"
+                className="max-w-[486px] w-full border border-light-gray rounded-[50px] px-10 pt-8 pb-5 flex flex-col items-center justify-center space-y-4"
               >
                 <h3 className=" mb-6 text-center font-baloo text-2xl font-extrabold tracking-none leading-[140%] capitalize">
-                  {t("login-0")}
+                  {t("login")}
                 </h3>
 
                 {/* Back end error massage */}
